@@ -34,7 +34,7 @@ config :phoenix, :generators,
 config :ueberauth, Ueberauth,
   providers: [
     facebook: { Ueberauth.Strategy.Facebook, [] },
-    github: { Ueberauth.Strategy.Github, [] },
+    github: { Ueberauth.Strategy.Github, [default_scope: "user"] },
     google: { Ueberauth.Strategy.Google, [] },
     identity: { Ueberauth.Strategy.Identity, [
         callback_methods: ["POST"],
