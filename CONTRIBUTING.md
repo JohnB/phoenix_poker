@@ -2,11 +2,11 @@
 
 ## Pull Requests Welcome
 
-1. Fork ueberauth_example
+1. Fork phoenix_poker
 2. Create a topic branch
 3. Make logically-grouped commits with clear commit messages
 4. Push commits to your fork
-5. Open a pull request against ueberauth_example/master
+5. Open a pull request against phoenix_poker/master
 
 ## Issues
 

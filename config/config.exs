@@ -6,12 +6,12 @@
 use Mix.Config
 
 # Configures the endpoint
-config :ueberauth_example, UeberauthExample.Endpoint,
+config :phoenix_poker, PhoenixPoker.Endpoint,
   url: [host: "localhost"],
   root: Path.dirname(__DIR__),
   render_errors: [accepts: ~w(html json)],
   secret_key_base: System.get_env("SECRET_KEY_BASE"),
-  pubsub: [name: UeberauthExample.PubSub,
+  pubsub: [name: PhoenixPoker.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
 # Configures Elixir's Logger
@@ -20,7 +20,7 @@ config :logger, :console,
   metadata: [:request_id]
 
 # Configure the Ecto Repos
-config :ueberauth_example, ecto_repos: [UeberauthExample.Repo]
+config :phoenix_poker, ecto_repos: [PhoenixPoker.Repo]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

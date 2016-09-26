@@ -1,4 +1,4 @@
-defmodule UeberauthExample.ModelCase do
+defmodule PhoenixPoker.ModelCase do
   @moduledoc """
   This module defines the test case to be used by
   model tests.
@@ -16,18 +16,18 @@ defmodule UeberauthExample.ModelCase do
 
   using do
     quote do
-      alias UeberauthExample.Repo
+      alias PhoenixPoker.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
-      import UeberauthExample.ModelCase
+      import PhoenixPoker.ModelCase
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(UeberauthExample.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PhoenixPoker.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(UeberauthExample.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(PhoenixPoker.Repo, {:shared, self()})
     end
 
     :ok

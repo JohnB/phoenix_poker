@@ -1,9 +1,9 @@
-defmodule UeberauthExample.AuthController do
+defmodule PhoenixPoker.AuthController do
   @moduledoc """
   Auth controller responsible for handling Ueberauth responses
   """
 
-  use UeberauthExample.Web, :controller
+  use PhoenixPoker.Web, :controller
   plug Ueberauth
 
   alias Ueberauth.Strategy.Helpers

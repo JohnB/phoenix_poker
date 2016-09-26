@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :ueberauth_example, UeberauthExample.Endpoint,
+config :phoenix_poker, PhoenixPoker.Endpoint,
   http: [port: {:system, "PORT"}],
   url: [scheme: "https", host: "ueberauth-example.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
@@ -11,7 +11,7 @@ config :ueberauth_example, UeberauthExample.Endpoint,
 config :logger, level: :info
 
 # Configure your database
-config :ueberauth_example, UeberauthExample.Repo,
+config :phoenix_poker, PhoenixPoker.Repo,
   adapter: Ecto.Adapters.Postgres,
   url: System.get_env("DATABASE_URL"),
   pool_size: 20

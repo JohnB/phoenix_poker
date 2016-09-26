@@ -1,7 +1,7 @@
-defmodule UeberauthExample.ErrorView do
+defmodule PhoenixPoker.ErrorView do
   @moduledoc false
 
-  use UeberauthExample.Web, :view
+  use PhoenixPoker.Web, :view
 
   def render("404.html", _assigns) do
     "Page not found"

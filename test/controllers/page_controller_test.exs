@@ -1,5 +1,5 @@
-defmodule UeberauthExample.PageControllerTest do
-  use UeberauthExample.ConnCase
+defmodule PhoenixPoker.PageControllerTest do
+  use PhoenixPoker.ConnCase
 
   test "GET /" do
     conn = get build_conn(), "/"

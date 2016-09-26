@@ -1,5 +1,5 @@
-defmodule UeberauthExample.AuthView do
+defmodule PhoenixPoker.AuthView do
   @moduledoc false
 
-  use UeberauthExample.Web, :view
+  use PhoenixPoker.Web, :view
 end

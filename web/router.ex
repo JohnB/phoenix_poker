@@ -1,7 +1,7 @@
-defmodule UeberauthExample.Router do
+defmodule PhoenixPoker.Router do
   @moduledoc false
 
-  use UeberauthExample.Web, :router
+  use PhoenixPoker.Web, :router
   require Ueberauth
 
   pipeline :browser do
@@ -16,7 +16,7 @@ defmodule UeberauthExample.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/auth", UeberauthExample do
+  scope "/auth", PhoenixPoker do
     pipe_through [:browser]
 
     get "/:provider", AuthController, :request
@@ -25,7 +25,7 @@ defmodule UeberauthExample.Router do
     delete "/logout", AuthController, :delete
   end
 
-  scope "/", UeberauthExample do
+  scope "/", PhoenixPoker do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
