@@ -1,4 +1,4 @@
-defmodule UeberauthExample do
+defmodule PhoenixPoker do
   @moduledoc false
 
   use Application
@@ -10,23 +10,23 @@ defmodule UeberauthExample do
 
     children = [
       # Start the endpoint when the application starts
-      supervisor(UeberauthExample.Endpoint, []),
+      supervisor(PhoenixPoker.Endpoint, []),
       # Start the Ecto repository
-      worker(UeberauthExample.Repo, []),
+      worker(PhoenixPoker.Repo, []),
       # Here you could define other workers and supervisors as children
-      # worker(UeberauthExample.Worker, [arg1, arg2, arg3]),
+      # worker(PhoenixPoker.Worker, [arg1, arg2, arg3]),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
     # for other strategies and supported options
-    opts = [strategy: :one_for_one, name: UeberauthExample.Supervisor]
+    opts = [strategy: :one_for_one, name: PhoenixPoker.Supervisor]
     Supervisor.start_link(children, opts)
   end
 
   # Tell Phoenix to update the endpoint configuration
   # whenever the application is updated.
   def config_change(changed, _new, removed) do
-    UeberauthExample.Endpoint.config_change(changed, removed)
+    PhoenixPoker.Endpoint.config_change(changed, removed)
     :ok
   end
 end

@@ -1,3 +1,3 @@
-defmodule UeberauthExample.LayoutViewTest do
-  use UeberauthExample.ConnCase, async: true
+defmodule PhoenixPoker.LayoutViewTest do
+  use PhoenixPoker.ConnCase, async: true
 end

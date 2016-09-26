@@ -1,8 +1,8 @@
-defmodule UeberauthExample.Mixfile do
+defmodule PhoenixPoker.Mixfile do
   use Mix.Project
 
   def project do
-    [app: :ueberauth_example,
+    [app: :phoenix_poker,
      version: "0.0.1",
      elixir: "~> 1.3",
      elixirc_paths: elixirc_paths(Mix.env),
@@ -17,7 +17,7 @@ defmodule UeberauthExample.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [mod: {UeberauthExample, []},
+    [mod: {PhoenixPoker, []},
      applications: [:phoenix,
                     :phoenix_html,
                     :cowboy,

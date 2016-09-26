@@ -1,12 +1,12 @@
-defmodule UeberauthExample.Web do
+defmodule PhoenixPoker.Web do
   @moduledoc """
   A module that keeps using definitions for controllers,
   views and so on.
 
   This can be used in your application as:
 
-      use UeberauthExample.Web, :controller
-      use UeberauthExample.Web, :view
+      use PhoenixPoker.Web, :controller
+      use PhoenixPoker.Web, :view
 
   The definitions below will be executed for every view,
   controller, etc, so keep them short and clean, focused
@@ -29,11 +29,11 @@ defmodule UeberauthExample.Web do
     quote do
       use Phoenix.Controller
 
-      alias UeberauthExample.Repo
+      alias PhoenixPoker.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
 
-      import UeberauthExample.Router.Helpers
+      import PhoenixPoker.Router.Helpers
     end
   end
 
@@ -49,7 +49,7 @@ defmodule UeberauthExample.Web do
       # Use all HTML functionality (forms, tags, etc)
       use Phoenix.HTML
 
-      import UeberauthExample.Router.Helpers
+      import PhoenixPoker.Router.Helpers
     end
   end
 
@@ -63,7 +63,7 @@ defmodule UeberauthExample.Web do
     quote do
       use Phoenix.Channel
 
-      alias UeberauthExample.Repo
+      alias PhoenixPoker.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 1, from: 2]
     end

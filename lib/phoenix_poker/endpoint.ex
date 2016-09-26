@@ -1,16 +1,16 @@
-defmodule UeberauthExample.Endpoint do
+defmodule PhoenixPoker.Endpoint do
   @moduledoc false
 
-  use Phoenix.Endpoint, otp_app: :ueberauth_example
+  use Phoenix.Endpoint, otp_app: :phoenix_poker
 
-  socket "/socket", UeberauthExample.UserSocket
+  socket "/socket", PhoenixPoker.UserSocket
 
   # Serve at "/" the static files from "priv/static" directory.
   #
   # You should set gzip to true if you are running phoenix.digest
   # when deploying your static files in production.
   plug Plug.Static,
-    at: "/", from: :ueberauth_example, gzip: false,
+    at: "/", from: :phoenix_poker, gzip: false,
     only: ~w(css fonts images js favicon.ico robots.txt)
 
   # Code reloading can be explicitly enabled under the
@@ -37,5 +37,5 @@ defmodule UeberauthExample.Endpoint do
     key: "_ueberauth_example_key",
     signing_salt: "pJYawTy2"
 
-  plug UeberauthExample.Router
+  plug PhoenixPoker.Router
 end

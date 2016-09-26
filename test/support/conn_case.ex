@@ -1,4 +1,4 @@
-defmodule UeberauthExample.ConnCase do
+defmodule PhoenixPoker.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -20,22 +20,22 @@ defmodule UeberauthExample.ConnCase do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
 
-      alias UeberauthExample.Repo
+      alias PhoenixPoker.Repo
       import Ecto.Model
       import Ecto.Query, only: [from: 2]
 
-      import UeberauthExample.Router.Helpers
+      import PhoenixPoker.Router.Helpers
 
       # The default endpoint for testing
-      @endpoint UeberauthExample.Endpoint
+      @endpoint PhoenixPoker.Endpoint
     end
   end
 
   setup tags do
-    :ok = Ecto.Adapters.SQL.Sandbox.checkout(UeberauthExample.Repo)
+    :ok = Ecto.Adapters.SQL.Sandbox.checkout(PhoenixPoker.Repo)
 
     unless tags[:async] do
-      Ecto.Adapters.SQL.Sandbox.mode(UeberauthExample.Repo, {:shared, self()})
+      Ecto.Adapters.SQL.Sandbox.mode(PhoenixPoker.Repo, {:shared, self()})
     end
 
     :ok

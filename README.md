@@ -1,8 +1,8 @@
 # Überauth Example
 [![Build Status][travis-img]][travis] [![License][license-img]][license]
 
-[travis-img]: https://travis-ci.org/ueberauth/ueberauth_example.png?branch=master
-[travis]: https://travis-ci.org/ueberauth/ueberauth_example
+[travis-img]: https://travis-ci.org/ueberauth/phoenix_poker.png?branch=master
+[travis]: https://travis-ci.org/ueberauth/phoenix_poker
 [license-img]: http://img.shields.io/badge/license-MIT-brightgreen.svg
 [license]: http://opensource.org/licenses/MIT
 
@@ -47,8 +47,8 @@ In this example we'll use five strategies:
 1. Clone the project:
 
 	```shell
-	$ git clone git@github.com:ueberauth/ueberauth_example.git
-	$ cd ueberauth_example
+	$ git clone git@github.com:ueberauth/phoenix_poker.git
+	$ cd phoenix_poker
 	```
 
 1. Fetch dependecies:
@@ -71,4 +71,4 @@ See [Überauth](https://github.com/ueberauth/ueberauth) for detailed instruction
 
 ## License
 
-Please see [LICENSE](https://github.com/ueberauth/ueberauth_example/blob/master/LICENSE) for licensing details.
+Please see [LICENSE](https://github.com/ueberauth/phoenix_poker/blob/master/LICENSE) for licensing details.

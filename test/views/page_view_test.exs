@@ -1,3 +1,3 @@
-defmodule UeberauthExample.PageViewTest do
-  use UeberauthExample.ConnCase, async: true
+defmodule PhoenixPoker.PageViewTest do
+  use PhoenixPoker.ConnCase, async: true
 end
