@@ -21,7 +21,7 @@ defmodule PhoenixPoker.ConnCase do
       use Phoenix.ConnTest
 
       alias PhoenixPoker.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
       import PhoenixPoker.Router.Helpers
