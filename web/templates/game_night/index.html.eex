@@ -1,0 +1,28 @@
+<h2>Listing game nights</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Yyyymmdd</th>
+      <th>Buy in cents</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for game_night <- @game_nights do %>
+    <tr>
+      <td><%= game_night.yyyymmdd %></td>
+      <td><%= game_night.buy_in_cents %></td>
+
+      <td class="text-right">
+        <%= link "Show", to: game_night_path(@conn, :show, game_night), class: "btn btn-default btn-xs" %>
+        <%= link "Edit", to: game_night_path(@conn, :edit, game_night), class: "btn btn-default btn-xs" %>
+        <%= link "Delete", to: game_night_path(@conn, :delete, game_night), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<%= link "New game night", to: game_night_path(@conn, :new) %>
