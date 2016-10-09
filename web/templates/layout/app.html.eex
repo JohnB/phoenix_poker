@@ -15,15 +15,6 @@
   <body>
     <div class="container" role="main">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li>
-            <a href="https://github.com/johnb/phoenix_poker">
-              <i class="fa fa-github"></i>
-              View on GitHub
-            </a>
-          </li>
-        </ul>
-        <span class="logo"></span>
       </div>
 
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
@@ -32,6 +23,14 @@
       <%= render @view_module, @view_template, assigns %>
 
     </div> <!-- /container -->
+    <ul class="nav nav-pills pull-right">
+      <li>
+        <a href="https://github.com/johnb/phoenix_poker">
+          <i class="fa fa-github"></i>
+          View on GitHub
+        </a>
+      </li>
+    </ul>
     <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
   </body>
 </html>
