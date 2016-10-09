@@ -21,7 +21,7 @@ defmodule PhoenixPoker.ChannelCase do
       use Phoenix.ChannelTest
 
       alias PhoenixPoker.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
 
 

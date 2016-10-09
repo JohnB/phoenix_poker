@@ -17,7 +17,7 @@ defmodule PhoenixPoker.ModelCase do
   using do
     quote do
       alias PhoenixPoker.Repo
-      import Ecto.Model
+      import Ecto.Schema
       import Ecto.Query, only: [from: 2]
       import PhoenixPoker.ModelCase
     end
