@@ -12,6 +12,6 @@ config :logger, level: :warn
 # Configure your database
 config :phoenix_poker, PhoenixPoker.Repo,
   adapter: Ecto.Adapters.Postgres,
-  database: "ueberauth_example_test",
+  database: "phoenix_poker_test",
   hostname: "localhost",
   pool: Ecto.Adapters.SQL.Sandbox

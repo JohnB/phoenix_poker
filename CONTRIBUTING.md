@@ -1,4 +1,4 @@
-# Contributing to Ueberauth Example
+# Contributing to Phoenix Poker
 
 ## Pull Requests Welcome
 

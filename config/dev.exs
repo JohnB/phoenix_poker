@@ -39,6 +39,6 @@ config :phoenix_poker, PhoenixPoker.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "ueberauth_example_dev",
+  database: "phoenix_poker_dev",
   hostname: "localhost",
   pool_size: 10

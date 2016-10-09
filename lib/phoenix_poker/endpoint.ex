@@ -34,7 +34,7 @@ defmodule PhoenixPoker.Endpoint do
 
   plug Plug.Session,
     store: :cookie,
-    key: "_ueberauth_example_key",
+    key: "_phoenix_poker_key",
     signing_salt: "pJYawTy2"
 
   plug PhoenixPoker.Router
