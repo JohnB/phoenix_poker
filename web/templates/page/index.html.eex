@@ -8,6 +8,9 @@
     <img src="<%= @current_user.avatar %>" class="img-circle"/>
     <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
     <br>
+    <%= link "Add Player", to: player_path(@conn, :new) %>
+    |
+    <%= link "Game Nights", to: game_night_path(@conn, :index) %>
   <% else %>
     <a class="btn btn-primary btn-lg" href="/auth/github">
       <i class="fa fa-github"></i>
