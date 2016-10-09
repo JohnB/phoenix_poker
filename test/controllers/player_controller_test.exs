@@ -2,7 +2,7 @@ defmodule PhoenixPoker.PlayerControllerTest do
   use PhoenixPoker.ConnCase
 
   alias PhoenixPoker.Player
-  @valid_attrs %{nickname: "some content"}
+  @valid_attrs %{nickname: "some content", email: 'whatever@whereever.com'}
   @invalid_attrs %{}
 
   test "lists all entries on index", %{conn: conn} do

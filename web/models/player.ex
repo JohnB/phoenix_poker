@@ -3,6 +3,7 @@ defmodule PhoenixPoker.Player do
 
   schema "players" do
     field :nickname, :string
+    field :email, :string
 
     timestamps()
   end
@@ -12,7 +13,7 @@ defmodule PhoenixPoker.Player do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:nickname])
-    |> validate_required([:nickname])
+    |> cast(params, [:nickname, :email])
+    |> validate_required([:nickname, :email])
   end
 end

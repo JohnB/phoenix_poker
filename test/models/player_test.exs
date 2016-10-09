@@ -3,7 +3,7 @@ defmodule PhoenixPoker.PlayerTest do
 
   alias PhoenixPoker.Player
 
-  @valid_attrs %{nickname: "some content"}
+  @valid_attrs %{nickname: "some content", email: 'whatever@whereever.com'}
   @invalid_attrs %{}
 
   test "changeset with valid attributes" do
