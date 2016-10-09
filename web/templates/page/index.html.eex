@@ -4,7 +4,7 @@
   </p>
 
   <%= if @current_user do %>
-    <h2>Welcome, <%= @current_user.name %>!</h2>
+    <h3>Welcome, <%= @current_user.name %>!</h3>
     <img src="<%= @current_user.avatar %>" class="img-circle"/>
     <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
     <br>
