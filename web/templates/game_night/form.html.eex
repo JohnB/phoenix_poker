@@ -8,6 +8,7 @@
   <div class="form-group">
     <%= label f, :yyyymmdd, class: "control-label" %>
     <%= number_input f, :yyyymmdd, class: "form-control" %>
+    <!-- %= error_tag f, :yyyymmdd % -->
   </div>
 
   <div class="form-group">

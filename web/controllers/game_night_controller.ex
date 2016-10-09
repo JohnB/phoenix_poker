@@ -9,7 +9,8 @@ defmodule PhoenixPoker.GameNightController do
   end
 
   def new(conn, _params) do
-    changeset = GameNight.changeset(%GameNight{})
+    yyyymmdd = DateTime.utc_now.year * 10000 + DateTime.utc_now.month * 100 + DateTime.utc_now.day
+    changeset = GameNight.changeset(%GameNight{buy_in_cents: 2500, yyyymmdd: yyyymmdd})
     render(conn, "new.html", changeset: changeset)
   end
 

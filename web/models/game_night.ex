@@ -14,6 +14,7 @@ defmodule PhoenixPoker.GameNight do
   def changeset(struct, params \\ %{}) do
     struct
     |> cast(params, [:yyyymmdd, :buy_in_cents])
+    |> unique_constraint(:yyyymmdd)
     |> validate_required([:yyyymmdd, :buy_in_cents])
   end
 end
