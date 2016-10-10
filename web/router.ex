@@ -31,5 +31,6 @@ defmodule PhoenixPoker.Router do
     get "/", PageController, :index
     resources "/players", PlayerController
     resources "/game_nights", GameNightController
+    resources "/attendee_results", AttendeeResultController
   end
 end

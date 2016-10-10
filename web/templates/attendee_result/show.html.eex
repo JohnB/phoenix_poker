@@ -1,0 +1,38 @@
+<h2>Show attendee result</h2>
+
+<ul>
+
+  <li>
+    <strong>Game night:</strong>
+    <%= @attendee_result.game_night_id %>
+  </li>
+
+  <li>
+    <strong>Player:</strong>
+    <%= @attendee_result.player_id %>
+  </li>
+
+  <li>
+    <strong>Chips:</strong>
+    <%= @attendee_result.chips %>
+  </li>
+
+  <li>
+    <strong>Exact cents:</strong>
+    <%= @attendee_result.exact_cents %>
+  </li>
+
+  <li>
+    <strong>Rounded cents:</strong>
+    <%= @attendee_result.rounded_cents %>
+  </li>
+
+  <li>
+    <strong>Rounding style:</strong>
+    <%= @attendee_result.rounding_style %>
+  </li>
+
+</ul>
+
+<%= link "Edit", to: attendee_result_path(@conn, :edit, @attendee_result) %>
+<%= link "Back", to: attendee_result_path(@conn, :index) %>
