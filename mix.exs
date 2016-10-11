@@ -54,9 +54,9 @@ defmodule PhoenixPoker.Mixfile do
      {:ueberauth_github, "~> 0.2"},
      {:ueberauth_identity, "~> 0.2"},
      {:ueberauth_slack, "~> 0.2"},
-     {:ueberauth_twitter, "~> 0.2"},
+     {:ueberauth_twitter, "~> 0.2"} #,
 
-     {:dogma, ">= 0.0.0", only: [:dev, :test]}
+     #{:dogma, ">= 0.0.0", only: [:dev, :test]}
    ]
   end
 
