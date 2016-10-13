@@ -8,8 +8,24 @@ defmodule PhoenixPoker.GameNightController do
     render(conn, "index.html", game_nights: game_nights)
   end
 
+  def start(conn, _params) do
+    changeset = GameNight.changeset(%GameNight{buy_in_cents: 2500, yyyymmdd: yyyymmdd})
+
+    case Repo.insert(changeset) do
+      {:ok, _game_night} ->
+        conn
+        |> put_flash(:info, "Game night created successfully.")
+        |> redirect(to: game_night_path(conn, :index))
+      {:error, changeset} ->
+        render(conn, "new.html", changeset: changeset)
+    end
+  end
+  
+  def yyyymmdd() do
+    DateTime.utc_now.year * 10000 + DateTime.utc_now.month * 100 + DateTime.utc_now.day
+  end
+
   def new(conn, _params) do
-    yyyymmdd = DateTime.utc_now.year * 10000 + DateTime.utc_now.month * 100 + DateTime.utc_now.day
     changeset = GameNight.changeset(%GameNight{buy_in_cents: 2500, yyyymmdd: yyyymmdd})
     render(conn, "new.html", changeset: changeset)
   end
