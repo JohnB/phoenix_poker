@@ -5,7 +5,7 @@
     </div>
   <% end %>
 
-FORM: <%= inspect(@players) %>
+FORM: <%= Enum.map_join(@players, " | ", fn player -> player.nickname end) %>
 
   <div class="form-group">
     <%= label f, :game_night_id, class: "control-label" %>

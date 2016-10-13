@@ -1,7 +1,5 @@
 <h2>New attendee result</h2>
   
-NEW: <%= inspect(@players) %>
-
 <%= render "form.html", changeset: @changeset,
                         action: attendee_result_path(@conn, :create),
                         players: @players
