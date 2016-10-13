@@ -2,6 +2,7 @@ defmodule PhoenixPoker.AttendeeResultController do
   use PhoenixPoker.Web, :controller
 
   alias PhoenixPoker.AttendeeResult
+  alias PhoenixPoker.Player
 
   def index(conn, _params) do
     attendee_results = Repo.all(AttendeeResult)
@@ -10,8 +11,8 @@ defmodule PhoenixPoker.AttendeeResultController do
 
   def new(conn, _params) do
     changeset = AttendeeResult.changeset(%AttendeeResult{})
-#    @players = Repo.all(Player)
-    render(conn, "new.html", changeset: changeset)
+    players = Repo.all(Player)
+    render(conn, "new.html", players: players, changeset: changeset)
   end
 
   def create(conn, %{"attendee_result" => attendee_result_params}) do

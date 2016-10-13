@@ -5,11 +5,13 @@
     </div>
   <% end %>
 
+FORM: <%= inspect(@players) %>
+
   <div class="form-group">
     <%= label f, :game_night_id, class: "control-label" %>
     <%= number_input f, :game_night_id, class: "form-control" %>
   </div>
-
+  
   <div class="form-group">
     <%= label f, :player_id, class: "control-label" %>
     <%= number_input f, :player_id, class: "form-control" %>

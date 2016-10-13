@@ -8,7 +8,7 @@ defmodule PhoenixPoker.AttendeeResult do
     field :exact_cents, :integer
     field :rounded_cents, :integer
     field :rounding_style, :string
-
+    
     timestamps()
   end
 
