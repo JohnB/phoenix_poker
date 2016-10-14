@@ -4,6 +4,16 @@
   </p>
 
   <%= if @current_user do %>
+    <h3>Future games</h3>
+  
+  <div class="btn-group" data-toggle="buttons">
+    <%= for game <- @future do %>
+      <p>
+      <%= link(List.last(Tuple.to_list(game)), to: "/game_nights/#{List.first(Tuple.to_list(game))}" ) %>
+      </p>
+    <% end %>
+  </div>
+
     <h3>Welcome, <%= @current_user.name %>!</h3>
     <img src="<%= @current_user.avatar %>" class="img-circle"/>
     <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
