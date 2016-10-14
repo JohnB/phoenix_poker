@@ -9,7 +9,7 @@
   <div class="btn-group" data-toggle="buttons">
     <%= for game <- @future do %>
       <p>
-      <%= link(List.last(Tuple.to_list(game)), to: "/game_nights/#{List.first(Tuple.to_list(game))}" ) %>
+      <%= link(game.yyyymmdd, to: "/game_nights/#{game.id}" ) %>
       </p>
     <% end %>
   </div>

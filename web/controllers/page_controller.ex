@@ -10,9 +10,9 @@ defmodule PhoenixPoker.PageController do
     
     yyyymmdd = DateTime.utc_now.year * 10000 + DateTime.utc_now.month * 100 + DateTime.utc_now.day
 
-    future = from( g in "game_nights",
+    future = from g in PhoenixPoker.GameNight,
              where: g.yyyymmdd > ^yyyymmdd,
-             select: {g.id, g.yyyymmdd} )
+             order_by: [desc: :yyyymmdd]
 #    current = from g in "game_nights",
 #              where: g.yyyymmdd = yyyymmdd,
 #              select: g.id, g.yyyymmdd
@@ -22,6 +22,7 @@ defmodule PhoenixPoker.PageController do
               
     render( conn, "index.html",
       current_user: get_session(conn, :current_user),
+#      future: Repo.all(PhoenixPoker.GameNight, where: "yyymmdd > #{:yyyymmdd}", order_by: "yyyymmdd DESC" ) #,
       future: Repo.all(future) #,
 #      current: Repo.all(current),
 #      past: Repo.all(past)
