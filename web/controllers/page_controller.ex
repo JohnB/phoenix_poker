@@ -5,10 +5,11 @@ defmodule PhoenixPoker.PageController do
 
   use PhoenixPoker.Web, :controller
   import Ecto.Query, only: [from: 2]
+  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0]
 
   def index(conn, _params) do
     
-    yyyymmdd = DateTime.utc_now.year * 10000 + DateTime.utc_now.month * 100 + DateTime.utc_now.day
+    yyyymmdd = yyyymmdd_now()
 
     future = from g in PhoenixPoker.GameNight,
              where: g.yyyymmdd > ^yyyymmdd,

@@ -2,6 +2,7 @@ defmodule PhoenixPoker.GameNightController do
   use PhoenixPoker.Web, :controller
 
   alias PhoenixPoker.GameNight
+  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0]
 
   def index(conn, _params) do
     game_nights = Repo.all(GameNight)
@@ -9,7 +10,7 @@ defmodule PhoenixPoker.GameNightController do
   end
 
   def new(conn, _params) do
-    yyyymmdd = DateTime.utc_now.year * 10000 + DateTime.utc_now.month * 100 + DateTime.utc_now.day
+    yyyymmdd = yyyymmdd_now()
     changeset = GameNight.changeset(%GameNight{buy_in_cents: 2500, yyyymmdd: yyyymmdd})
     render(conn, "new.html", changeset: changeset)
   end
