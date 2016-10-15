@@ -9,24 +9,20 @@ defmodule PhoenixPoker.PageController do
 
   def index(conn, _params) do
     
-    yyyymmdd = yyyymmdd_now()
-
     future = from g in PhoenixPoker.GameNight,
-             where: g.yyyymmdd > ^yyyymmdd,
-             order_by: [desc: :yyyymmdd]
-#    current = from g in "game_nights",
-#              where: g.yyyymmdd = yyyymmdd,
-#              select: g.id, g.yyyymmdd
-#    past = from g in "game_nights",
-#           where: g.yyyymmdd < yyyymmdd,
-#           select: g.id, g.yyyymmdd
+             where: g.yyyymmdd > ^yyyymmdd_now(),
+             order_by: [desc: :yyyymmdd],
+             limit: 10
+    past = from g in PhoenixPoker.GameNight,
+           where: g.yyyymmdd < ^yyyymmdd_now(),
+           order_by: [desc: :yyyymmdd],
+           limit: 10
               
     render( conn, "index.html",
       current_user: get_session(conn, :current_user),
-#      future: Repo.all(PhoenixPoker.GameNight, where: "yyymmdd > #{:yyyymmdd}", order_by: "yyyymmdd DESC" ) #,
-      future: Repo.all(future) #,
-#      current: Repo.all(current),
-#      past: Repo.all(past)
+      future: Repo.all(future),
+      yyyymmdd: yyyymmdd_now(),
+      past: Repo.all(past)
     )
   end
 end

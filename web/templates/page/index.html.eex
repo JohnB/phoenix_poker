@@ -1,20 +1,27 @@
 <div class="jumbotron">
-  <h2>Phoenix Poker</h2>
-  <p class="lead">
-  </p>
-
   <%= if @current_user do %>
-    <h3>Future games</h3>
+    <h3>Welcome, <%= @current_user.name %>, to Phoenix Poker!</h3>
   
-  <div class="btn-group" data-toggle="buttons">
-    <%= for game <- @future do %>
-      <p>
-      <%= link(game.yyyymmdd, to: "/game_nights/#{game.id}" ) %>
-      </p>
-    <% end %>
-  </div>
+    <div class="btn-group" data-toggle="buttons">
+      <%= for game <- @future do %>
+        <p>
+        <%= link(game.yyyymmdd, to: "/game_nights/#{game.id}" ) %>
+        </p>
+      <% end %>
+    </div>
+    <br />
+    <h2>
+      <%= link("TONIGHT: #{@yyyymmdd}", to: "/game_nights/take_attendance/#{@yyyymmdd}" ) %>
+    </h2>
+    <div class="btn-group" data-toggle="buttons">
+      <%= for game <- @past do %>
+        <p>
+        <%= link(game.yyyymmdd, to: "/game_nights/#{game.id}" ) %>
+        </p>
+      <% end %>
+    </div>
 
-    <h3>Welcome, <%= @current_user.name %>!</h3>
+    <br />
     <img src="<%= @current_user.avatar %>" class="img-circle"/>
     <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
     <br>
