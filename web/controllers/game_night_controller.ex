@@ -33,6 +33,32 @@ defmodule PhoenixPoker.GameNightController do
     render(conn, "show.html", game_night: game_night)
   end
 
+  def take_attendance(conn, %{"yyyymmdd" => yyyymmdd}) do
+    current_user = get_session(conn, :current_user)
+
+    # Attempt at find-or-create
+    query = from g in GameNight, where: g.yyyymmdd == ^yyyymmdd
+    if !Repo.one(query)  do
+      changeset = GameNight.changeset(%GameNight{}, %{buy_in_cents: 2500, yyyymmdd: yyyymmdd})
+  
+      case Repo.insert(changeset) do
+        {:ok, struct}       -> # Inserted with success
+          conn
+          |> put_flash(:info, "Inserted the #{yyyymmdd} game: #{inspect(struct)}.")
+          |> render("take_attendance.html", game_night: struct, current_user: current_user)
+        {:error, changeset} -> # Something went wrong
+          conn
+          |> put_flash(:info, "Failed to inserted the #{yyyymmdd} game: #{inspect(changeset)}.")
+          |> render("take_attendance.html", game_night: changeset, current_user: current_user)
+      end
+    end
+    game_night = Repo.one(query)
+
+    conn
+    |> put_flash(:info, "Found the #{yyyymmdd} game: #{inspect(game_night)}.")
+    |> render("take_attendance.html", asf: "succsss", game_night: game_night, current_user: current_user)
+  end
+
   def edit(conn, %{"id" => id}) do
     game_night = Repo.get!(GameNight, id)
     changeset = GameNight.changeset(game_night)
