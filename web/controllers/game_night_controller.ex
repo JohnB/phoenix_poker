@@ -38,25 +38,25 @@ defmodule PhoenixPoker.GameNightController do
 
     # Attempt at find-or-create
     query = from g in GameNight, where: g.yyyymmdd == ^yyyymmdd
-    if !Repo.one(query)  do
+    game_night = Repo.one(query)
+    if !game_night do
       changeset = GameNight.changeset(%GameNight{}, %{buy_in_cents: 2500, yyyymmdd: yyyymmdd})
   
       case Repo.insert(changeset) do
-        {:ok, struct}       -> # Inserted with success
+        {:ok, struct} ->
           conn
           |> put_flash(:info, "Inserted the #{yyyymmdd} game: #{inspect(struct)}.")
-          |> render("take_attendance.html", game_night: struct, current_user: current_user)
-        {:error, changeset} -> # Something went wrong
+          |> redirect(to: game_night_path(conn, :show, struct))
+        {:error, changeset} ->
           conn
           |> put_flash(:info, "Failed to inserted the #{yyyymmdd} game: #{inspect(changeset)}.")
           |> render("take_attendance.html", game_night: changeset, current_user: current_user)
       end
     end
-    game_night = Repo.one(query)
 
     conn
     |> put_flash(:info, "Found the #{yyyymmdd} game: #{inspect(game_night)}.")
-    |> render("take_attendance.html", asf: "succsss", game_night: game_night, current_user: current_user)
+    |> redirect(to: game_night_path(conn, :show, game_night))
   end
 
   def edit(conn, %{"id" => id}) do
