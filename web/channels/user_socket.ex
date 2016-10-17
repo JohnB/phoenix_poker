@@ -4,7 +4,7 @@ defmodule PhoenixPoker.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "rooms:*", PhoenixPoker.RoomChannel
+   channel "attendance:lobby", PhoenixPoker.AttendanceChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket,

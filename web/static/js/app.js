@@ -18,4 +18,30 @@ import "deps/phoenix_html/web/static/js/phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-// import socket from "./socket"
+import socket from "./socket"
+
+
+$(document).ready(function() {
+        alert('complete, right? '+document.readyState)
+
+    let channel = socket.channel("attendance:lobby", {token: 'roomToken'})
+    channel.on("new_msg", msg => console.log("Got message", msg) )
+
+    $( "#foo" ).keydown(function(event) {
+      console.log( "Handler for foo.keydown() called." );
+      var keypressed = event.keyCode || event.which;
+      if (keypressed == 13) {
+        event.preventDefault();
+
+        channel.push("new_msg", {body: event.target.val}, 10000)
+          .receive("ok", (msg) => console.log("created message", msg) )
+          .receive("error", (reasons) => console.log("create failed", reasons) )
+          .receive("timeout", () => console.log("push Networking issue...") )
+        }
+    });
+
+    channel.join()
+      .receive("ok", ({messages}) => console.log("catching up", messages) )
+      .receive("error", ({reason}) => console.log("failed join", reason) )
+      .receive("timeout", () => console.log("join Networking issue. Still waiting...") )
+})

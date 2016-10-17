@@ -1,6 +1,7 @@
 <div class="jumbotron">
   <%= if @current_user do %>
     <h3>Welcome, <%= @current_user.name %>, to Phoenix Poker!</h3>
+    <input id='foo'
   
     <div class="btn-group" data-toggle="buttons">
       <%= for game <- @future do %>
