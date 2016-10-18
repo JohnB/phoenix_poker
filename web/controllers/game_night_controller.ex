@@ -47,7 +47,7 @@ defmodule PhoenixPoker.GameNightController do
         {:ok, struct} ->
           conn
           |> put_flash(:info, "Inserted the #{yyyymmdd} game: #{inspect(struct)}.")
-          |> redirect(to: game_night_path(conn, :show, struct))
+          |> redirect(to: game_night_path(conn, :current_attendance, struct))
         {:error, changeset} ->
           conn
           |> put_flash(:info, "Failed to inserted the #{yyyymmdd} game: #{inspect(changeset)}.")
@@ -57,7 +57,7 @@ defmodule PhoenixPoker.GameNightController do
 
     conn
     |> put_flash(:info, "Found the #{yyyymmdd} game: #{inspect(game_night)}.")
-    |> redirect(to: game_night_path(conn, :show, game_night))
+    |> redirect(to: game_night_path(conn, :current_attendance, game_night))
   end
   
   def current_attendance(conn, %{"id" => id}) do

@@ -1,0 +1,8 @@
+.player-selection {
+    background-color: gray;
+
+    input[type=checkbox]:checked {
+        background-color: yellow;
+        border: 1px solid black;
+    }
+}

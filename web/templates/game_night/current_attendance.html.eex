@@ -1,28 +1,16 @@
-current_attendance
+Roll Call - Who is Here?
+<%= form_for @conn, game_night_path(@conn, :cash_out, @game_night.id), [as: :cash_out], fn f -> %>
 
-<label class="checkbox-inline">
-  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-</label>
-<label class="checkbox-inline">
-  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-</label>
-<label class="checkbox-inline">
-  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-</label>
-<label class="checkbox-inline">
-  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-</label>
-<label class="checkbox-inline">
-  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
-</label>
+  <%= for player <- @players do %>
+    <label class="btn btn-primary player-selection">
+      <%= checkbox f, :player_id %>
+      <%= player.nickname %>
+    </label>
+  <% end %>
 
-<br />
-
-<%= for player <- @players do %>
-  <label class="btn btn-primary">
-    <input type="checkbox"
-           id="inlineCheckbox<%= player.id %>"
-           value="<%= player.id %>"> <%= player.nickname %>
-  </label>
+  <p />
+  
+  <div class="form-group">
+    <%= submit "Cash Out", class: "btn btn-primary" %>
+  </div>
 <% end %>
-<p />
