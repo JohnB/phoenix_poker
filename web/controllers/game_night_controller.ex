@@ -2,6 +2,7 @@ defmodule PhoenixPoker.GameNightController do
   use PhoenixPoker.Web, :controller
 
   alias PhoenixPoker.GameNight
+  alias PhoenixPoker.Player
   import PhoenixPoker.Utils, only: [yyyymmdd_now: 0]
 
   def index(conn, _params) do
@@ -57,6 +58,12 @@ defmodule PhoenixPoker.GameNightController do
     conn
     |> put_flash(:info, "Found the #{yyyymmdd} game: #{inspect(game_night)}.")
     |> redirect(to: game_night_path(conn, :show, game_night))
+  end
+  
+  def current_attendance(conn, %{"id" => id}) do
+    game_night = Repo.get!(GameNight, id)
+    players = Repo.all(Player)
+    render(conn, "current_attendance.html", game_night: game_night, players: players)
   end
 
   def edit(conn, %{"id" => id}) do
