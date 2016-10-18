@@ -1,0 +1,28 @@
+current_attendance
+
+<label class="checkbox-inline">
+  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+</label>
+<label class="checkbox-inline">
+  <input type="checkbox" id="inlineCheckbox1" value="option1"> 1
+</label>
+
+<br />
+
+<%= for player <- @players do %>
+  <label class="btn btn-primary">
+    <input type="checkbox"
+           id="inlineCheckbox<%= player.id %>"
+           value="<%= player.id %>"> <%= player.nickname %>
+  </label>
+<% end %>
+<p />
