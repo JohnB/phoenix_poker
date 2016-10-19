@@ -65,6 +65,26 @@ defmodule PhoenixPoker.GameNightController do
     players = Repo.all(Player)
     render(conn, "current_attendance.html", game_night: game_night, players: players)
   end
+  
+  def cash_out(conn, %{"id" => id, "cash_out" => player_ids}) do
+    game_night = Repo.get!(GameNight, id)
+    
+    # Expect input like this:
+    #   "cash_out" => %{"1" => "false", "2" => "true"}
+    # TODO: filter IDs from player_ids
+    # TODO: find or create attendeeResult entries
+    
+    render(conn, "send_results.html",
+            game_night: game_night,
+            # , attendee_results: attendee_results
+            )
+  end
+
+  def send_results(conn, %{"id" => id, "cash_out" => player_ids}) do
+    game_night = Repo.get!(GameNight, id)
+    players = Repo.all(Player)
+    render(conn, "current_attendance.html", game_night: game_night, players: players)
+  end
 
   def edit(conn, %{"id" => id}) do
     game_night = Repo.get!(GameNight, id)

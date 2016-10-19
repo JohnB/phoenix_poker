@@ -3,7 +3,7 @@ Roll Call - Who is Here?
 
   <%= for player <- @players do %>
     <label class="btn btn-primary player-selection">
-      <%= checkbox f, :player_id %>
+      <%= checkbox f, :"#{player.id}" %>
       <%= player.nickname %>
     </label>
   <% end %>
