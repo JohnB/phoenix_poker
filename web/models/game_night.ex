@@ -4,6 +4,8 @@ defmodule PhoenixPoker.GameNight do
   schema "game_nights" do
     field :yyyymmdd, :integer
     field :buy_in_cents, :integer
+    
+    has_many :attendee_results, PhoenixPoker.AttendeeResult
 
     timestamps()
   end

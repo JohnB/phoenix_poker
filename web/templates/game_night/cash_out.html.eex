@@ -1,0 +1,24 @@
+<h1>
+  <%= @game_night.yyyymmdd %>
+</h1>
+
+<ul>
+  <ul>
+    <li />attendee_result.player.id
+    <li />attendee_result.player.nickname
+    <li />attendee_result.chips
+    <li />attendee_result.exact_cents
+  </ul>
+  <%= for attendee_result <- @game_night.attendee_results do %>
+    <li />
+      <ul>
+        <li /><%= attendee_result.player.id %>
+        <li /><%= attendee_result.player.nickname %>
+        <li /><%= attendee_result.chips %>
+        <li /><%= attendee_result.exact_cents %>
+      </ul>
+  <% end %>
+</ul>
+<br />
+
+

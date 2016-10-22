@@ -3,6 +3,7 @@ defmodule PhoenixPoker.GameNightController do
 
   alias PhoenixPoker.GameNight
   alias PhoenixPoker.Player
+  alias PhoenixPoker.AttendeeResult
   import PhoenixPoker.Utils, only: [yyyymmdd_now: 0]
 
   def index(conn, _params) do
@@ -67,23 +68,34 @@ defmodule PhoenixPoker.GameNightController do
   end
   
   def cash_out(conn, %{"id" => id, "cash_out" => player_ids}) do
-    game_night = Repo.get!(GameNight, id)
-    
     # Expect input like this:
     #   "cash_out" => %{"1" => "false", "2" => "true"}
-    # TODO: filter IDs from player_ids
-    # TODO: find or create attendeeResult entries
+    # TODO: stop duplicating attendeeResult entries
+    #
+    Enum.filter(player_ids, fn {_k, v} -> v == "true" end)
+    |> Enum.map(fn {k, _v} ->
+      AttendeeResult.changeset(%AttendeeResult{}, %{
+          game_night_id: id,
+          player_id: k,
+          chips: 0,
+          exact_cents: 0,
+          rounded_cents: 0,
+          rounding_style: "quarter"
+        })
+      |> PhoenixPoker.Repo.insert!
+    end)
     
-    render(conn, "send_results.html",
-            game_night: game_night,
-            # , attendee_results: attendee_results
-            )
+    game_night = GameNight
+                 |> Repo.get!(id)
+                 |> Repo.preload([:attendee_results, attendee_results: :player])
+            
+    render(conn, "cash_out.html", game_night: game_night)
   end
 
   def send_results(conn, %{"id" => id, "cash_out" => player_ids}) do
     game_night = Repo.get!(GameNight, id)
     players = Repo.all(Player)
-    render(conn, "current_attendance.html", game_night: game_night, players: players)
+    render(conn, "send_results.html", game_night: game_night, players: players)
   end
 
   def edit(conn, %{"id" => id}) do

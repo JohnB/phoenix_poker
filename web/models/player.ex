@@ -5,6 +5,8 @@ defmodule PhoenixPoker.Player do
     field :nickname, :string
     field :email, :string
 
+    has_many :attendee_results, PhoenixPoker.AttendeeResult
+
     timestamps()
   end
 

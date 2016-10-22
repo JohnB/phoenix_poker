@@ -2,12 +2,13 @@ defmodule PhoenixPoker.AttendeeResult do
   use PhoenixPoker.Web, :model
 
   schema "attendee_results" do
-    field :game_night_id, :integer
-    field :player_id, :integer
     field :chips, :integer
     field :exact_cents, :integer
     field :rounded_cents, :integer
     field :rounding_style, :string
+    
+    belongs_to :game_night, PhoenixPoker.GameNight
+    belongs_to :player, PhoenixPoker.Player
     
     timestamps()
   end
