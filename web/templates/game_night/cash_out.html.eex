@@ -2,23 +2,37 @@
   <%= @game_night.yyyymmdd %>
 </h1>
 
-<ul>
-  <ul>
-    <li />attendee_result.player.id
-    <li />attendee_result.player.nickname
-    <li />attendee_result.chips
-    <li />attendee_result.exact_cents
-  </ul>
-  <%= for attendee_result <- @game_night.attendee_results do %>
-    <li />
-      <ul>
-        <li /><%= attendee_result.player.id %>
-        <li /><%= attendee_result.player.nickname %>
-        <li /><%= attendee_result.chips %>
-        <li /><%= attendee_result.exact_cents %>
-      </ul>
-  <% end %>
-</ul>
+<div class="row">
+  <div class="col-sm-1">
+    Player
+  </div>
+  <div class="col-sm-1">
+    Chips
+  </div>
+  <div class="col-sm-1">
+    Exact
+  </div>
+  <div class="col-sm-1">
+    $1
+  </div>
+</div>
+
+<%= for attendee_result <- @game_night.attendee_results do %>
+  <div class="row">
+    <div class="col-sm-1">
+      <%= attendee_result.player.nickname %>
+    </div>
+    <div class="col-sm-1">
+      <%= attendee_result.chips %>
+    </div>
+    <div class="col-sm-1">
+      <%= attendee_result.exact_cents %>
+    </div>
+    <div class="col-sm-1">
+      <%= attendee_result.rounded_cents %>
+    </div>
+  </div>
+<% end %>
 <br />
 
 
