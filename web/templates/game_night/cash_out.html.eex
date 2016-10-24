@@ -18,20 +18,22 @@
 </div>
 
 <%= for attendee_result <- @game_night.attendee_results do %>
-  <div class="row">
-    <div class="col-sm-1">
-      <%= attendee_result.player.nickname %>
-    </div>
-    <div class="col-sm-1">
-      <%= attendee_result.chips %>
-    </div>
-    <div class="col-sm-1">
-      <%= attendee_result.exact_cents %>
-    </div>
-    <div class="col-sm-1">
-      <%= attendee_result.rounded_cents %>
-    </div>
-  </div>
+  <%= if Integer.to_string(attendee_result.player_id) == @selected_player_id do %>
+    <em><a href="/game_nights/cash_out/<%= @game_night.id %>/select/-1" >
+      <%= render("cash_out_row.html", attendee_result: attendee_result) %>
+    </a ></em>
+    <div class="row">
+      <a href="/attendee_result/"<%= attendee_result.id %>"/add/500">PLUS 5</a>
+      <a href="/attendee_result/"<%= attendee_result.id %>"/add/100">PLUS 1</a>
+      <a href="/attendee_result/"<%= attendee_result.id %>"/add/100">PLUS 25c</a>
+      <a href="/attendee_result/"<%= attendee_result.id %>"/subtract/100">minus 1</a>
+      <a href="/attendee_result/"<%= attendee_result.id %>"/subtract/100">minus 5</a>
+    </div >
+  <%= else %>
+    <a href="/game_nights/cash_out/<%= @game_night.id %>/select/<%= attendee_result.player_id %>" >
+      <%= render("cash_out_row.html", attendee_result: attendee_result) %>
+    </a >
+  <% end %>
 <% end %>
 <br />
 
