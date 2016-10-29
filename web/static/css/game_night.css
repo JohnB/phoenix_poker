@@ -1,8 +1,28 @@
 .player-selection {
     background-color: gray;
 
+    /*this selector isn't working how I want*/
     input[type=checkbox]:checked {
-        background-color: yellow;
+    background-color: yellow;
         border: 1px solid black;
     }
 }
+
+/*.chip-counting {*/
+    .attendee {
+        background-color: #fff;
+    }
+
+    .player-counting-chips {
+        background-color: #eee;
+        border: 1px solid black;
+    }
+
+    .increment-chips {
+        /*background-color: green;*/
+    }
+
+    .decrement-chips {
+        /*background-color: red;*/
+    }
+/*}*/

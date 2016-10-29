@@ -1,14 +1,12 @@
-<div class="row">
-  <div class="col-sm-1">
-    <span class="btn btn-primary"><%= @attendee_result.player.nickname %></span>
+  <div class="col-lg-6">
+    <span class="btn <%= @classname %>"><%= @attendee_result.player.nickname %></span>
   </div>
-  <div class="col-sm-1">
+  <div class="col-lg-2">
     <%= @attendee_result.chips %>
   </div>
-  <div class="col-sm-1">
+  <div class="col-lg-2">
     <%= @attendee_result.exact_cents %>
   </div>
-  <div class="col-sm-1">
+  <div class="col-lg-2">
     <%= @attendee_result.rounded_cents %>
   </div>
-</div>

@@ -3,38 +3,82 @@
 </h1>
 
 <div class="row">
-  <div class="col-sm-1">
+  <div class="col-lg-6">
     Player
   </div>
-  <div class="col-sm-1">
+  <div class="col-lg-2">
     Chips
   </div>
-  <div class="col-sm-1">
+  <div class="col-lg-2">
     Exact
   </div>
-  <div class="col-sm-1">
+  <div class="col-lg-2">
     $1
   </div>
 </div>
 
+<div class="chip-counting">
 <%= for attendee_result <- @game_night.attendee_results do %>
-  <%= if Integer.to_string(attendee_result.player_id) == @selected_player_id do %>
-    <em><a href="/game_nights/cash_out/<%= @game_night.id %>/select/-1" >
-      <%= render("cash_out_row.html", attendee_result: attendee_result) %>
-    </a ></em>
+  <% selected_player = Integer.to_string(attendee_result.player_id) == @selected_player_id %>
+  <% btn_type = if selected_player do "btn-primary"; else "btn-default"; end %>
+  <%= if selected_player do %>
+    <div class="row col-lg12 player-counting-chips">
     <div class="row">
-      <a href="/attendee_result/"<%= attendee_result.id %>"/add/500">PLUS 5</a>
-      <a href="/attendee_result/"<%= attendee_result.id %>"/add/100">PLUS 1</a>
-      <a href="/attendee_result/"<%= attendee_result.id %>"/add/100">PLUS 25c</a>
-      <a href="/attendee_result/"<%= attendee_result.id %>"/subtract/100">minus 1</a>
-      <a href="/attendee_result/"<%= attendee_result.id %>"/subtract/100">minus 5</a>
+      <div class="col-lg-1">
+      <a href="/game_nights/cash_out/<%= @game_night.id %>/select/-1" >
+        <div class="col-lg-6">
+          <span class="btn "><%= attendee_result.player.nickname %></span>
+        </div>
+      </a >
+      </div>
+      <div class="col-lg-5">
+        <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
+          <span class="btn btn-success ">
+            + 5
+          </span>
+        </a>
+        <a href="/attendee_result/<%= attendee_result.id %>/add/100" >
+          <span class="btn btn-success ">
+            + 1
+          </span>
+        </a>
+        <a href="/attendee_result/<%= attendee_result.id %>/add/025" >
+          <span class="btn btn-success ">
+            +25c
+          </span>
+        </a>
+        <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
+          <span class="btn btn-danger ">
+            - 1
+          </span>
+        </a>
+        <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
+          <span class="btn btn-danger ">
+            - 5
+          </span>
+        </a>
+      </div>
+      <div class="col-lg-2">
+        <%= attendee_result.chips %>
+      </div>
+      <div class="col-lg-2">
+        <%= attendee_result.exact_cents %>
+      </div>
+      <div class="col-lg-2">
+        <%= attendee_result.rounded_cents %>
+      </div>
+    </div>
     </div >
   <%= else %>
+    <div class="row attendee">
     <a href="/game_nights/cash_out/<%= @game_night.id %>/select/<%= attendee_result.player_id %>" >
-      <%= render("cash_out_row.html", attendee_result: attendee_result) %>
+      <%= render("cash_out_row.html", attendee_result: attendee_result, classname: "btn-default") %>
     </a >
+    </div>
   <% end %>
 <% end %>
+</div>
+
 <br />
 
 
