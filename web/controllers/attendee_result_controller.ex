@@ -64,4 +64,39 @@ defmodule PhoenixPoker.AttendeeResultController do
     |> put_flash(:info, "Attendee result deleted successfully.")
     |> redirect(to: attendee_result_path(conn, :index))
   end
+
+  def add_chips(conn, %{"id" => id, "cents" => cents}) do
+    {chips_i, _} = Integer.parse(cents)
+    attendee_result = Repo.get!(AttendeeResult, id)
+    changeset = AttendeeResult.changeset(attendee_result, %{chips: attendee_result.chips + chips_i})
+    next_page = game_night_path(conn, :cash_out_player, attendee_result.game_night_id, attendee_result.player_id)
+
+    case Repo.update(changeset) do
+      {:ok, _} ->
+        conn
+        |> redirect(to: next_page)
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "error adding chips.")
+        |> redirect(to: next_page)
+    end
+  end
+
+  def subtract_chips(conn, %{"id" => id, "cents" => cents}) do
+    {chips_i, _} = Integer.parse(cents)
+    attendee_result = Repo.get!(AttendeeResult, id)
+    updated_chips = Enum.max([0, attendee_result.chips - chips_i])
+    changeset = AttendeeResult.changeset(attendee_result, %{chips: updated_chips})
+    next_page = game_night_path(conn, :cash_out_player, attendee_result.game_night_id, attendee_result.player_id)
+
+    case Repo.update(changeset) do
+      {:ok, _} ->
+        conn
+        |> redirect(to: next_page)
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "error adding chips.")
+        |> redirect(to: next_page)
+    end
+  end
 end

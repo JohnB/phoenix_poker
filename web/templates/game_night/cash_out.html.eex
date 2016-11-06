@@ -32,6 +32,11 @@
       </a >
       </div>
       <div class="col-lg-5">
+        <a href="/attendee_result/<%= attendee_result.id %>/add/1000" >
+          <span class="btn btn-success ">
+            + 10
+          </span>
+        </a>
         <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
           <span class="btn btn-success ">
             + 5
@@ -47,12 +52,12 @@
             +25c
           </span>
         </a>
-        <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
+        <a href="/attendee_result/<%= attendee_result.id %>/subtract/100" >
           <span class="btn btn-danger ">
             - 1
           </span>
         </a>
-        <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
+        <a href="/attendee_result/<%= attendee_result.id %>/subtract/500" >
           <span class="btn btn-danger ">
             - 5
           </span>
