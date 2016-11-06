@@ -92,7 +92,13 @@ defmodule PhoenixPoker.GameNightController do
                  |> Repo.get!(id)
                  |> Repo.preload([:attendee_results, attendee_results: :player])
             
-    render(conn, "cash_out.html", game_night: game_night, selected_player_id: -1)
+    render(conn, "cash_out.html",
+      game_night: game_night,
+      selected_player_id: -1,
+      total_chips: 123,
+      exact_cents: 23456,
+      round_1_cents: 34500
+    )
   end
   
   def cash_out_player(conn, %{"id" => id, "player_id" => player_id}) do
@@ -104,8 +110,15 @@ defmodule PhoenixPoker.GameNightController do
       where: ar.game_night_id == ^id and ar.player_id == ^player_id,
       select: [ar.player_id]
     selected_player_id = Repo.one(query)
-#    render(conn, "cash_out.html", game_night: game_night, selected_player_id: selected_player_id)
-    render(conn, "cash_out.html", game_night: game_night, selected_player_id: player_id)
+#    total_chips = Enum.map(game_night.attendee_results, fn {a_r} -> a_r.chips end)
+
+    render(conn, "cash_out.html",
+      game_night: game_night,
+      selected_player_id: player_id,
+      total_chips: 111,
+      exact_cents: 22256,
+      rounded_1_cents: 33300
+    )
   end
 
   def send_results(conn, %{"id" => id, "cash_out" => player_ids}) do

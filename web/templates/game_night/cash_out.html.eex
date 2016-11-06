@@ -82,6 +82,20 @@
     </div>
   <% end %>
 <% end %>
+  <div class="row attendee">
+    <div class="col-lg-6">
+      <span class="btn btn-disabled">TOTALS:</span>
+    </div>
+    <div class="col-lg-2">
+      <%= @total_chips %>
+    </div>
+    <div class="col-lg-2">
+      <%= @exact_cents %>
+    </div>
+    <div class="col-lg-2">
+      <%= @rounded_1_cents %>
+    </div>
+  </div>
 </div>
 
 <br />
