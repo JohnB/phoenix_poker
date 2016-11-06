@@ -11,11 +11,14 @@
 /*.chip-counting {*/
     .attendee {
         background-color: #fff;
+        margin: 5px 0px;
     }
 
     .player-counting-chips {
         background-color: #eee;
         border: 1px solid black;
+        margin: 5px 0px;
+        padding: 5px 0px;
     }
 
     .increment-chips {

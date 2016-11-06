@@ -70,8 +70,11 @@ defmodule PhoenixPoker.GameNightController do
   def cash_out(conn, %{"id" => id, "cash_out" => player_ids}) do
     # Expect input like this:
     #   "cash_out" => %{"1" => "false", "2" => "true"}
-    # TODO: stop duplicating attendeeResult entries
-    #
+    {gn_id, _} = Integer.parse(id)
+    query = from ar in AttendeeResult,
+      where: ar.game_night_id == ^gn_id
+    Repo.delete_all(query)
+    
     Enum.filter(player_ids, fn {_k, v} -> v == "true" end)
     |> Enum.map(fn {k, _v} ->
       AttendeeResult.changeset(%AttendeeResult{}, %{
