@@ -115,9 +115,9 @@ defmodule PhoenixPoker.GameNightController do
     render(conn, "cash_out.html",
       game_night: game_night,
       selected_player_id: player_id,
-      total_chips: 111,
-      exact_cents: 22256,
-      rounded_1_cents: 33300
+      total_chips: 111 / 100,
+      exact_cents: 22256 / 100,
+      rounded_1_cents: 33300 / 100
     )
   end
 

@@ -2,11 +2,11 @@
     <span class="btn <%= @classname %>"><%= @attendee_result.player.nickname %></span>
   </div>
   <div class="col-lg-2">
-    <%= @attendee_result.chips %>
+    <%= @attendee_result.chips / 100 %>
   </div>
   <div class="col-lg-2">
-    <%= @attendee_result.exact_cents %>
+    <%= dollars_n_cents(@attendee_result.exact_cents) %>
   </div>
   <div class="col-lg-2">
-    <%= @attendee_result.rounded_cents %>
+    <%= dollars_n_cents(@attendee_result.rounded_cents) %>
   </div>

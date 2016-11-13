@@ -64,13 +64,13 @@
         </a>
       </div>
       <div class="col-lg-2">
-        <%= attendee_result.chips %>
+        <%= attendee_result.chips / 100 %>
       </div>
       <div class="col-lg-2">
-        <%= attendee_result.exact_cents %>
+        <%= dollars_n_cents(attendee_result.exact_cents) %>
       </div>
       <div class="col-lg-2">
-        <%= attendee_result.rounded_cents %>
+        <%= dollars_n_cents(attendee_result.rounded_cents) %>
       </div>
     </div>
     </div >
@@ -90,10 +90,10 @@
       <%= @total_chips %>
     </div>
     <div class="col-lg-2">
-      <%= @exact_cents %>
+      <%= dollars_n_cents(@exact_cents) %>
     </div>
     <div class="col-lg-2">
-      <%= @rounded_1_cents %>
+      <%= dollars_n_cents(@rounded_1_cents) %>
     </div>
   </div>
 </div>
