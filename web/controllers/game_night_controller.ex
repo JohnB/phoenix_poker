@@ -97,7 +97,7 @@ defmodule PhoenixPoker.GameNightController do
       selected_player_id: -1,
       total_chips: 123,
       exact_cents: 23456,
-      round_1_cents: 34500
+      rounded_1_cents: 34500
     )
   end
   
