@@ -110,14 +110,19 @@ defmodule PhoenixPoker.GameNightController do
       where: ar.game_night_id == ^id and ar.player_id == ^player_id,
       select: [ar.player_id]
     selected_player_id = Repo.one(query)
-#    total_chips = Enum.map(game_night.attendee_results, fn {a_r} -> a_r.chips end)
+
+    attendee_results = game_night.attendee_results
+    num_players = Enum.count(attendee_results)
+    total_chips = Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum
+    exact_cents = Enum.map(attendee_results, fn(a_r) -> a_r.exact_cents end) |> Enum.sum
+    rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
 
     render(conn, "cash_out.html",
       game_night: game_night,
       selected_player_id: player_id,
-      total_chips: 111 / 100,
-      exact_cents: 22256 / 100,
-      rounded_1_cents: 33300 / 100
+      total_chips: total_chips / 100,
+      exact_cents: exact_cents / 100,
+      rounded_1_cents: rounded_1_cents / 100
     )
   end
 
