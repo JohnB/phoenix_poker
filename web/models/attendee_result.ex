@@ -21,4 +21,24 @@ defmodule PhoenixPoker.AttendeeResult do
     |> cast(params, [:game_night_id, :player_id, :chips, :exact_cents, :rounded_cents, :rounding_style])
     |> validate_required([:game_night_id, :player_id, :chips, :exact_cents, :rounded_cents, :rounding_style])
   end
+  
+  @doc """
+  Builds a set of changesets based on the incoming attendee_results
+  """
+  def results_changeset(attendee_results) do
+    num_players = Enum.count(attendee_results)
+    total_buyin = 2500 * num_players
+    total_chips = Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum
+
+    exact_cents = Enum.map(attendee_results, fn(a_r) -> a_r.exact_cents end) |> Enum.sum
+    rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
+
+    Enum.map(attendee_results, fn(a_r) ->
+      exact_cents = total_buyin * a_r.chips / total_chips
+      changeset(a_r, %{
+        exact_cents: exact_cents,
+        rounded_cents: 100 * Float.round(exact_cents / 100),
+      })
+    end)
+  end
 end

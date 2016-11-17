@@ -1,9 +1,13 @@
 defmodule PhoenixPoker.AttendeeResultController do
   use PhoenixPoker.Web, :controller
+  
+  import Ecto
+  alias Ecto.Multi
 
+  alias PhoenixPoker.GameNight
   alias PhoenixPoker.AttendeeResult
   alias PhoenixPoker.Player
-
+  
   def index(conn, _params) do
     attendee_results = Repo.all(AttendeeResult)
     render(conn, "index.html", attendee_results: attendee_results)
@@ -71,10 +75,34 @@ defmodule PhoenixPoker.AttendeeResultController do
     changeset = AttendeeResult.changeset(attendee_result, %{chips: attendee_result.chips + chips_i})
     next_page = game_night_path(conn, :cash_out_player, attendee_result.game_night_id, attendee_result.player_id)
 
+    game_night = GameNight
+                 |> Repo.get!(attendee_result.game_night_id)
+                 |> Repo.preload([:attendee_results])
+    attendee_results = game_night.attendee_results
+    attendee_results_changeset = AttendeeResult.results_changeset(attendee_results)
+
+    game_night = GameNight
+                 |> Repo.get!(attendee_result.game_night_id)
+                 |> Repo.preload([:attendee_results])
+
     case Repo.update(changeset) do
       {:ok, _} ->
-        conn
-        |> redirect(to: next_page)
+        attendee_results = game_night.attendee_results
+        attendee_results_changeset = AttendeeResult.results_changeset(attendee_results)
+    
+        multi = Multi.new
+        |> Multi.update_all(:update_results, attendee_results_changeset)
+        
+        case PhoenixPoker.Repo.transaction(multi) do
+          {:ok, %{update_results: _}} ->
+            IO.puts "Succcess"
+            conn
+            |> redirect(to: next_page)
+          {:error, failed_operation, failed_value, changes_so_far} ->
+            IO.puts "Error"
+            conn
+            |> redirect(to: next_page)
+        end
       {:error, _} ->
         conn
         |> put_flash(:info, "error adding chips.")
@@ -99,4 +127,40 @@ defmodule PhoenixPoker.AttendeeResultController do
         |> redirect(to: next_page)
     end
   end
+
+  @doc """
+  Batch-update attendee_results with the exact and rounded values.
+  """
+  def xresults_changeset(game_night_id) do
+    game_night = GameNight
+                 |> Repo.get!(game_night_id)
+                 |> Repo.preload([:attendee_results])
+
+    attendee_results = game_night.attendee_results
+    num_players = Enum.count(attendee_results)
+    total_buyin = Enum.map(attendee_results, fn(a_r) -> a_r.buy_in_cents end) |> Enum.sum
+    total_chips = Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum
+
+    exact_cents = Enum.map(attendee_results, fn(a_r) -> a_r.exact_cents end) |> Enum.sum
+    rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
+
+    changeset = Enum.map(attendee_results, fn(a_r) ->
+      exact_cents = total_buyin * a_r.chips / total_chips
+      AttendeeResult.changeset(a_r, %{
+        exact_cents: exact_cents,
+        rounded_cents: 100 * Float.round(exact_cents / 100),
+      })
+    end)
+    
+    multi = Multi.new
+    |> Multi.update(:update_results, changeset)
+    
+    case PhoenixPoker.Repo.transaction(multi) do
+      {:ok, %{update_results: _}} ->
+        IO.puts "Succcess"
+      {:error, failed_operation, failed_value, changes_so_far} ->
+        IO.puts "Error"
+    end
+  end
+
 end
