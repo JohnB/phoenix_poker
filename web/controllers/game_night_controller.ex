@@ -121,8 +121,8 @@ defmodule PhoenixPoker.GameNightController do
       game_night: game_night,
       selected_player_id: player_id,
       total_chips: total_chips / 100,
-      exact_cents: exact_cents / 100,
-      rounded_1_cents: rounded_1_cents / 100
+      exact_cents: exact_cents,
+      rounded_1_cents: rounded_1_cents
     )
   end
 

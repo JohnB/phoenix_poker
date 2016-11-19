@@ -90,19 +90,12 @@ defmodule PhoenixPoker.AttendeeResultController do
         attendee_results = game_night.attendee_results
         attendee_results_changeset = AttendeeResult.results_changeset(attendee_results)
     
-        multi = Multi.new
-        |> Multi.update_all(:update_results, attendee_results_changeset)
+        Enum.each(attendee_results_changeset, fn(a_r) ->
+          {:ok, person} = Repo.update(a_r)
+        end )
         
-        case PhoenixPoker.Repo.transaction(multi) do
-          {:ok, %{update_results: _}} ->
-            IO.puts "Succcess"
-            conn
-            |> redirect(to: next_page)
-          {:error, failed_operation, failed_value, changes_so_far} ->
-            IO.puts "Error"
-            conn
-            |> redirect(to: next_page)
-        end
+        conn
+        |> redirect(to: next_page)
       {:error, _} ->
         conn
         |> put_flash(:info, "error adding chips.")
