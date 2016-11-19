@@ -63,13 +63,13 @@
           </span>
         </a>
       </div>
-      <div class="col-lg-2">
+      <div class="fixed col-lg-2">
         <%= attendee_result.chips / 100 %>
       </div>
-      <div class="col-lg-2">
+      <div class="fixed col-lg-2">
         <%= dollars_n_cents(attendee_result.exact_cents) %>
       </div>
-      <div class="col-lg-2">
+      <div class="fixed col-lg-2">
         <%= dollars_n_cents(attendee_result.rounded_cents) %>
       </div>
     </div>
@@ -82,17 +82,18 @@
     </div>
   <% end %>
 <% end %>
+  <hr>
   <div class="row attendee">
     <div class="col-lg-6">
       <span class="btn btn-disabled">TOTALS:</span>
     </div>
-    <div class="col-lg-2">
+    <div class="fixed col-lg-2">
       <%= @total_chips %>
     </div>
-    <div class="col-lg-2">
+    <div class="fixed col-lg-2">
       <%= dollars_n_cents(@exact_cents) %>
     </div>
-    <div class="col-lg-2">
+    <div class="fixed col-lg-2">
       <%= dollars_n_cents(@rounded_1_cents) %>
     </div>
   </div>

@@ -8,24 +8,27 @@
     }
 }
 
-/*.chip-counting {*/
-    .attendee {
-        background-color: #fff;
-        margin: 5px 0px;
-    }
+.fixed {
+    font-family: monospace;
+    font-size: larger;
+}
 
-    .player-counting-chips {
-        background-color: #eee;
-        border: 1px solid black;
-        margin: 5px 0px;
-        padding: 5px 0px;
-    }
+.attendee {
+    background-color: #fff;
+    margin: 5px 0px;
+}
 
-    .increment-chips {
-        /*background-color: green;*/
-    }
+.player-counting-chips {
+    background-color: #eee;
+    border: 1px solid black;
+    margin: 5px 0px;
+    padding: 5px 0px;
+}
 
-    .decrement-chips {
-        /*background-color: red;*/
-    }
-/*}*/
+.increment-chips {
+    /*background-color: green;*/
+}
+
+.decrement-chips {
+    /*background-color: red;*/
+}
