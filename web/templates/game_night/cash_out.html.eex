@@ -18,7 +18,7 @@
 </div>
 
 <div class="chip-counting">
-<%= for attendee_result <- @game_night.attendee_results do %>
+<%= for attendee_result <- @attendees do %>
   <% selected_player = Integer.to_string(attendee_result.player_id) == @selected_player_id %>
   <% btn_type = if selected_player do "btn-primary"; else "btn-default"; end %>
   <%= if selected_player do %>
