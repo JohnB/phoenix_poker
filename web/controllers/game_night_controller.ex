@@ -94,6 +94,7 @@ defmodule PhoenixPoker.GameNightController do
             
     render(conn, "cash_out.html",
       game_night: game_night,
+      attendees: Enum.sort(game_night.attendee_results, &(&1.player.nickname < &2.player.nickname) ),
       selected_player_id: -1,
       total_chips: 123,
       exact_cents: 23456,
