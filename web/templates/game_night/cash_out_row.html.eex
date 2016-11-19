@@ -8,5 +8,5 @@
     <%= dollars_n_cents(@attendee_result.exact_cents) %>
   </div>
   <div class="fixed col-lg-2">
-    <%= dollars_n_cents(@attendee_result.rounded_cents) %>
+    $<%= round(@attendee_result.rounded_cents / 100) %>
   </div>
