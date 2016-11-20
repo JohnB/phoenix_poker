@@ -2,103 +2,95 @@
   <%= @game_night.yyyymmdd %>
 </h1>
 
-<div class="row">
-  <div class="col-lg-6">
-    Player
-  </div>
-  <div class="col-lg-2">
-    Chips
-  </div>
-  <div class="col-lg-2">
-    Exact
-  </div>
-  <div class="col-lg-2">
-    $1
-  </div>
-</div>
-
-<div class="chip-counting">
-<%= for attendee_result <- @attendees do %>
-  <% selected_player = Integer.to_string(attendee_result.player_id) == @selected_player_id %>
-  <% btn_type = if selected_player do "btn-primary"; else "btn-default"; end %>
-  <%= if selected_player do %>
-    <div class="row col-lg12 player-counting-chips">
-    <div class="row">
-      <div class="col-lg-1">
-      <a href="/game_nights/cash_out/<%= @game_night.id %>/select/-1" >
-        <div class="col-lg-6">
-          <span class="btn "><%= attendee_result.player.nickname %></span>
-        </div>
-      </a >
-      </div>
-      <div class="col-lg-5">
-        <a href="/attendee_result/<%= attendee_result.id %>/add/1000" >
-          <span class="btn btn-success ">
-            + 10
-          </span>
-        </a>
-        <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
-          <span class="btn btn-success ">
-            + 5
-          </span>
-        </a>
-        <a href="/attendee_result/<%= attendee_result.id %>/add/100" >
-          <span class="btn btn-success ">
-            + 1
-          </span>
-        </a>
-        <a href="/attendee_result/<%= attendee_result.id %>/add/025" >
-          <span class="btn btn-success ">
-            +25c
-          </span>
-        </a>
-        <a href="/attendee_result/<%= attendee_result.id %>/subtract/100" >
-          <span class="btn btn-danger ">
-            - 1
-          </span>
-        </a>
-        <a href="/attendee_result/<%= attendee_result.id %>/subtract/500" >
-          <span class="btn btn-danger ">
-            - 5
-          </span>
-        </a>
-      </div>
-      <div class="fixed col-lg-2">
-        <%= attendee_result.chips / 100 %>
-      </div>
-      <div class="fixed col-lg-2">
-        <%= dollars_n_cents(attendee_result.exact_cents) %>
-      </div>
-      <div class="fixed col-lg-2">
-        $<%= round(attendee_result.rounded_cents / 100) %>
-      </div>
-    </div>
-    </div >
-  <%= else %>
-    <div class="row attendee">
-    <a href="/game_nights/cash_out/<%= @game_night.id %>/select/<%= attendee_result.player_id %>" >
-      <%= render("cash_out_row.html", attendee_result: attendee_result, classname: "btn-default") %>
-    </a >
-    </div>
-  <% end %>
-<% end %>
-  <hr>
-  <div class="row attendee">
-    <div class="col-lg-6">
-      <span class="btn btn-disabled">TOTALS:</span>
-    </div>
-    <div class="fixed col-lg-2">
-      <%= @total_chips %>
-    </div>
-    <div class="fixed col-lg-2">
-      <%= dollars_n_cents(@exact_cents) %>
-    </div>
-    <div class="fixed col-lg-2">
-      $<%= round(@rounded_1_cents / 100) %>
-    </div>
-  </div>
-</div>
-
-<br />
-
-
+<table class="table">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Chips</th>
+      <th>Exact</th>
+      <th>$1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for attendee_result <- @attendees do %>
+      <% selected_player = Integer.to_string(attendee_result.player_id) == @selected_player_id %>
+      <% btn_type = if selected_player do "btn-primary"; else "btn-default"; end %>
+      <tr>
+        <th scope="row">
+          <%= if selected_player do %>
+            <%= render("cash_out_player_button.html",
+                  game_night_id: @game_night.id,
+                  player_id: -1,
+                  nickname: attendee_result.player.nickname,
+                  classname: "btn-primary") %>
+          <%= else %>
+            <%= render("cash_out_player_button.html",
+                  game_night_id: @game_night.id,
+                  player_id: attendee_result.player_id,
+                  nickname: attendee_result.player.nickname,
+                  classname: "btn-default") %>
+          <%= end %>
+        </th>
+        <td>
+          <%= attendee_result.chips / 100 %>
+        </td>
+        <%= if selected_player do %>
+          <td colspan="2">
+            <a href="/attendee_result/<%= attendee_result.id %>/add/1000" >
+              <span class="btn btn-success ">
+                + 10
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
+              <span class="btn btn-success ">
+                + 5
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/add/100" >
+              <span class="btn btn-success ">
+                + 1
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/add/025" >
+              <span class="btn btn-success ">
+                +25c
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/subtract/100" >
+              <span class="btn btn-danger ">
+                - 1
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/subtract/500" >
+              <span class="btn btn-danger ">
+                - 5
+              </span>
+            </a>
+          </td>
+        <%= else %>
+          <td>
+            <%= dollars_n_cents(attendee_result.exact_cents) %>
+          </td>
+          <td>
+            $<%= round(attendee_result.rounded_cents / 100) %>
+          </td>
+        <%= end %>
+      </tr>
+    <%= end %>
+    
+    <tr>
+      <td>
+        TOTALS:
+      </td>
+      <td>
+        <%= @total_chips %>
+      </td>
+      <td>
+        <%= dollars_n_cents(@exact_cents) %>
+      </td>
+      <td>
+        $<%= round(@rounded_1_cents / 100) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
