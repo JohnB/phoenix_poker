@@ -1,9 +1,6 @@
 defmodule PhoenixPoker.AttendeeResultController do
   use PhoenixPoker.Web, :controller
   
-  import Ecto
-  alias Ecto.Multi
-
   alias PhoenixPoker.GameNight
   alias PhoenixPoker.AttendeeResult
   alias PhoenixPoker.Player
@@ -72,7 +69,8 @@ defmodule PhoenixPoker.AttendeeResultController do
   def add_chips(conn, %{"id" => id, "cents" => cents}) do
     {chips_i, _} = Integer.parse(cents)
     attendee_result = Repo.get!(AttendeeResult, id)
-    changeset = AttendeeResult.changeset(attendee_result, %{chips: attendee_result.chips + chips_i})
+    updated_chips = max(0, attendee_result.chips + chips_i)
+    changeset = AttendeeResult.changeset(attendee_result, %{chips: updated_chips})
     next_page = game_night_path(conn, :cash_out_player, attendee_result.game_night_id, attendee_result.player_id)
 
     case Repo.update(changeset) do
@@ -85,7 +83,7 @@ defmodule PhoenixPoker.AttendeeResultController do
         attendee_results_changeset = AttendeeResult.results_changeset(attendee_results)
     
         Enum.each(attendee_results_changeset, fn(a_r) ->
-          {:ok, person} = Repo.update(a_r)
+          {:ok, _} = Repo.update(a_r)
         end )
         
         conn

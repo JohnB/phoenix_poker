@@ -107,13 +107,7 @@ defmodule PhoenixPoker.GameNightController do
                  |> Repo.get!(id)
                  |> Repo.preload([:attendee_results, attendee_results: :player])
 
-    query = from ar in AttendeeResult,
-      where: ar.game_night_id == ^id and ar.player_id == ^player_id,
-      select: [ar.player_id]
-    selected_player_id = Repo.one(query)
-
     attendee_results = game_night.attendee_results
-    num_players = Enum.count(attendee_results)
     total_chips = Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum
     exact_cents = Enum.map(attendee_results, fn(a_r) -> a_r.exact_cents end) |> Enum.sum
     rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum

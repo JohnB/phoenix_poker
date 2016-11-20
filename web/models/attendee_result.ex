@@ -30,9 +30,6 @@ defmodule PhoenixPoker.AttendeeResult do
     total_buyin = 2500 * num_players
     total_chips = max(1, Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum)
 
-    exact_cents = Enum.map(attendee_results, fn(a_r) -> a_r.exact_cents end) |> Enum.sum
-    rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
-
     Enum.map(attendee_results, fn(a_r) ->
       exact_cents = total_buyin * a_r.chips / total_chips
       changeset(a_r, %{

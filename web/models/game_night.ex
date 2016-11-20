@@ -1,9 +1,6 @@
 defmodule PhoenixPoker.GameNight do
   use PhoenixPoker.Web, :model
   
-  import Ecto
-  alias Ecto.Multi
-
   schema "game_nights" do
     field :yyyymmdd, :integer
     field :buy_in_cents, :integer
