@@ -1,7 +1,10 @@
 defmodule PhoenixPoker.Utils do
+  use Timex
+  
   @moduledoc false
 
   def yyyymmdd_now() do
-    DateTime.utc_now.year * 10000 + DateTime.utc_now.month * 100 + DateTime.utc_now.day
+    now = Timex.now("-9")
+    now.year * 10000 + now.month * 100 + now.day
   end
 end

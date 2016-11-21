@@ -18,19 +18,23 @@ defmodule PhoenixPoker.Mixfile do
   # Type `mix help compile.app` for more information.
   def application do
     [mod: {PhoenixPoker, []},
-     applications: [:phoenix,
-                    :phoenix_html,
-                    :cowboy,
-                    :logger,
-                    :phoenix_ecto,
-                    :postgrex,
-                    :oauth,
-                    :ueberauth_facebook,
-                    :ueberauth_google,
-                    :ueberauth_github,
-                    :ueberauth_identity,
-                    :ueberauth_slack,
-                    :ueberauth_twitter]]
+      applications: [
+        :phoenix,
+        :phoenix_html,
+        :cowboy,
+        :logger,
+        :phoenix_ecto,
+        :postgrex,
+        :oauth,
+        :ueberauth_facebook,
+        :ueberauth_google,
+        :ueberauth_github,
+        :ueberauth_identity,
+        :ueberauth_slack,
+        :ueberauth_twitter,
+        :timex
+      ]
+    ]
   end
 
   # Specifies which paths to compile per environment.
@@ -54,7 +58,8 @@ defmodule PhoenixPoker.Mixfile do
      {:ueberauth_github, "~> 0.2"},
      {:ueberauth_identity, "~> 0.2"},
      {:ueberauth_slack, "~> 0.2"},
-     {:ueberauth_twitter, "~> 0.2"} #,
+     {:ueberauth_twitter, "~> 0.2"},
+     {:timex, "~> 3.0"}
 
      #{:dogma, ">= 0.0.0", only: [:dev, :test]}
    ]
