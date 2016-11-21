@@ -57,12 +57,19 @@ defmodule PhoenixPoker.GameNightController do
     end
 
     conn
-    |> put_flash(:info, "Found the #{yyyymmdd} game: #{inspect(game_night)}.")
     |> redirect(to: game_night_path(conn, :current_attendance, game_night))
   end
   
   def current_attendance(conn, %{"id" => id}) do
-    game_night = Repo.get!(GameNight, id)
+    game_night = GameNight
+                 |> Repo.get!(id)
+                 |> Repo.preload([:attendee_results])
+    num_attendees = Enum.count(game_night.attendee_results)
+
+    if num_attendees > 0 do
+      cash_out_player(conn, %{"id" => id, "player_id" => -1})
+    end
+    
     players = Repo.all(Player)
     render(conn, "current_attendance.html", game_night: game_night, players: players)
   end
