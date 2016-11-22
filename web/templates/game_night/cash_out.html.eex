@@ -93,3 +93,8 @@
     </tr>
   </tbody>
 </table>
+<a href="<%= @mailto_link %>" >
+  <span class="btn btn-success ">
+    Send Email with Results
+  </span>
+</a>

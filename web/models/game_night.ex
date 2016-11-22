@@ -19,4 +19,8 @@ defmodule PhoenixPoker.GameNight do
     |> unique_constraint(:yyyymmdd)
     |> validate_required([:yyyymmdd, :buy_in_cents])
   end
+  
+  def sorted_attendees(game_night) do
+    Enum.sort(game_night.attendee_results, &(&1.player.nickname < &2.player.nickname) )
+  end
 end

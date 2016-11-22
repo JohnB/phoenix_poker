@@ -4,7 +4,7 @@ defmodule PhoenixPoker.GameNightController do
   alias PhoenixPoker.GameNight
   alias PhoenixPoker.Player
   alias PhoenixPoker.AttendeeResult
-  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0]
+  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0, mailto_link: 1]
 
   def index(conn, _params) do
     game_nights = Repo.all(GameNight)
@@ -101,11 +101,12 @@ defmodule PhoenixPoker.GameNightController do
             
     render(conn, "cash_out.html",
       game_night: game_night,
-      attendees: Enum.sort(game_night.attendee_results, &(&1.player.nickname < &2.player.nickname) ),
+      attendees: GameNight.sorted_attendees(game_night),
       selected_player_id: -1,
       total_chips: 123,
       exact_cents: 23456,
-      rounded_1_cents: 34500
+      rounded_1_cents: 34500,
+      mailto_link: mailto_link(GameNight.sorted_attendees(game_night))
     )
   end
   
@@ -121,11 +122,12 @@ defmodule PhoenixPoker.GameNightController do
 
     render(conn, "cash_out.html",
       game_night: game_night,
-      attendees: Enum.sort(game_night.attendee_results, &(&1.player.nickname < &2.player.nickname) ),
+      attendees: GameNight.sorted_attendees(game_night),
       selected_player_id: player_id,
       total_chips: total_chips / 100,
       exact_cents: exact_cents,
-      rounded_1_cents: rounded_1_cents
+      rounded_1_cents: rounded_1_cents,
+      mailto_link: mailto_link(GameNight.sorted_attendees(game_night))
     )
   end
 
