@@ -18,7 +18,7 @@ defmodule PhoenixPoker.Utils do
     
     body = Enum.map(game_night.attendee_results, fn(a_r) ->
       " #{a_r.player.nickname}: $#{
-        a_r.rounded_cents / 100} (#{
+        round(a_r.rounded_cents / 100)} (#{
         a_r.chips / 100} chips / $#{
         a_r.exact_cents / 100}) <br /> "
     end)
