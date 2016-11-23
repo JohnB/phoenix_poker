@@ -106,7 +106,7 @@ defmodule PhoenixPoker.GameNightController do
       total_chips: 123,
       exact_cents: 23456,
       rounded_1_cents: 34500,
-      mailto_link: mailto_link(GameNight.sorted_attendees(game_night))
+      mailto_link: mailto_link(game_night)
     )
   end
   
@@ -127,7 +127,7 @@ defmodule PhoenixPoker.GameNightController do
       total_chips: total_chips / 100,
       exact_cents: exact_cents,
       rounded_1_cents: rounded_1_cents,
-      mailto_link: mailto_link(GameNight.sorted_attendees(game_night))
+      mailto_link: mailto_link(game_night)
     )
   end
 
