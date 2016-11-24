@@ -16,7 +16,7 @@
     <div class="btn-group" data-toggle="buttons">
       <%= for game <- @past do %>
         <p>
-        <%= link(game.yyyymmdd, to: "/game_nights/#{game.id}" ) %>
+        <%= link(game.yyyymmdd, to: "/game_nights/current_attendance/#{game.id}" ) %>
         </p>
       <% end %>
     </div>
@@ -25,9 +25,15 @@
     <img src="<%= @current_user.avatar %>" class="img-circle"/>
     <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
     <br>
-    <%= link "Add Player", to: player_path(@conn, :new) %>
-    |
-    <%= link "Game Nights", to: game_night_path(@conn, :index) %>
+  
+    <%= if @current_user.name == "John Baylor" do %>
+      <%= link "Add Player", to: player_path(@conn, :new) %>
+      |
+      <%= link "Game Nights", to: game_night_path(@conn, :index) %>
+      |
+      (only visible to John)
+    <% end %>
+  
   <% else %>
     <a class="btn btn-primary btn-lg" href="/auth/github">
       <i class="fa fa-github"></i>
