@@ -47,11 +47,10 @@ defmodule PhoenixPoker.GameNightController do
       case Repo.insert(changeset) do
         {:ok, struct} ->
           conn
-          |> put_flash(:info, "Inserted the #{yyyymmdd} game: #{inspect(struct)}.")
           |> redirect(to: game_night_path(conn, :current_attendance, struct))
         {:error, changeset} ->
           conn
-          |> put_flash(:info, "Failed to inserted the #{yyyymmdd} game: #{inspect(changeset)}.")
+          |> put_flash(:info, "Failed to insert the #{yyyymmdd} game: #{inspect(changeset)}.")
           |> render("take_attendance.html", game_night: changeset, current_user: current_user)
       end
     end

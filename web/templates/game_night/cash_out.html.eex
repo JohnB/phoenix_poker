@@ -98,5 +98,5 @@
     Send Email with Results
   </span>
 </a>
-<br>
+<p></p>
 <%= @mailto_link %>
