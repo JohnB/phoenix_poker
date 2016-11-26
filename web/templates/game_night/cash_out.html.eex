@@ -1,5 +1,7 @@
 <h1>
+  <a href="/" >
   <%= @game_night.yyyymmdd %>
+  </a>
 </h1>
 
 <table class="table">
