@@ -62,7 +62,7 @@ defmodule PhoenixPoker.GameNightController do
   def current_attendance(conn, %{"id" => id}) do
     game_night = GameNight
                  |> Repo.get!(id)
-                 |> Repo.preload([:attendee_results])
+                 |> Repo.preload([:attendee_results, attendee_results: :player])
     num_attendees = Enum.count(game_night.attendee_results)
 
     if num_attendees > 0 do
@@ -98,7 +98,7 @@ defmodule PhoenixPoker.GameNightController do
                  |> Repo.get!(id)
                  |> Repo.preload([:attendee_results, attendee_results: :player])
             
-    render(conn, "cash_out.html",
+    render(conn, PhoenixPoker.SharedView, "cash_out.html",
       game_night: game_night,
       attendees: GameNight.sorted_attendees(game_night),
       selected_player_id: -1,
@@ -119,7 +119,7 @@ defmodule PhoenixPoker.GameNightController do
     exact_cents = Enum.map(attendee_results, fn(a_r) -> a_r.exact_cents end) |> Enum.sum
     rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
 
-    render(conn, "cash_out.html",
+    render(conn, PhoenixPoker.SharedView, "cash_out.html",
       game_night: game_night,
       attendees: GameNight.sorted_attendees(game_night),
       selected_player_id: player_id,

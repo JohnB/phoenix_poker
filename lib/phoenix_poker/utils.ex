@@ -8,6 +8,10 @@ defmodule PhoenixPoker.Utils do
     now.year * 10000 + now.month * 100 + now.day
   end
   
+  def dollars_n_cents(cents) do
+    '$' ++ Float.to_string(cents / 100)
+  end
+
   def mailto_link(game_night) do
     subj = "Poker Results: #{game_night.yyyymmdd}"
 

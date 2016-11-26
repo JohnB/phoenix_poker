@@ -4,6 +4,8 @@ defmodule PhoenixPoker.AttendeeResultController do
   alias PhoenixPoker.GameNight
   alias PhoenixPoker.AttendeeResult
   alias PhoenixPoker.Player
+  alias PhoenixPoker.GameNightController
+  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0, mailto_link: 1]
   
   def index(conn, _params) do
     attendee_results = Repo.all(AttendeeResult)
@@ -71,13 +73,12 @@ defmodule PhoenixPoker.AttendeeResultController do
     attendee_result = Repo.get!(AttendeeResult, id)
     updated_chips = max(0, attendee_result.chips + chips_i)
     changeset = AttendeeResult.changeset(attendee_result, %{chips: updated_chips})
-    next_page = game_night_path(conn, :cash_out_player, attendee_result.game_night_id, attendee_result.player_id)
 
     case Repo.update(changeset) do
       {:ok, _} ->
         game_night = GameNight
                      |> Repo.get!(attendee_result.game_night_id)
-                     |> Repo.preload([:attendee_results])
+                     |> Repo.preload([:attendee_results, attendee_results: :player])
     
         attendee_results = game_night.attendee_results
         attendee_results_changeset = AttendeeResult.results_changeset(attendee_results)
@@ -85,10 +86,22 @@ defmodule PhoenixPoker.AttendeeResultController do
         Enum.each(attendee_results_changeset, fn(a_r) ->
           {:ok, _} = Repo.update(a_r)
         end )
-        
-        conn
-        |> redirect(to: next_page)
+
+        total_chips = max(1, Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum)
+        rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
+        render(conn, PhoenixPoker.SharedView, "cash_out.html",
+                  game_night: game_night,
+                  attendees: GameNight.sorted_attendees(game_night),
+                  selected_player_id: Integer.to_string(attendee_result.player_id),
+                  total_chips: total_chips / 100,
+                  exact_cents: attendee_result.exact_cents,
+                  rounded_1_cents: rounded_1_cents,
+                  mailto_link: mailto_link(game_night)
+                  )
+
+        GameNightController.cash_out_player(conn, %{"id" => attendee_result.game_night_id, "player_id" => attendee_result.player_id})
       {:error, _} ->
+        next_page = game_night_path(conn, :cash_out_player, attendee_result.game_night_id, attendee_result.player_id)
         conn
         |> put_flash(:info, "error adding chips.")
         |> redirect(to: next_page)
