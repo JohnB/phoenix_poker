@@ -101,4 +101,6 @@
   </span>
 </a>
 <p></p>
-<%= @mailto_link %>
+<textarea rows="9" cols="80">
+  <%= @mailto_link %>
+</textarea>
