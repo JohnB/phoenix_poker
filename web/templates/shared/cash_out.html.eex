@@ -14,11 +14,12 @@
     </tr>
   </thead>
   <tbody>
+    <% is_historical_game = @game_night.yyyymmdd < PhoenixPoker.Utils.yyyymmdd_now() %>
     <%= for attendee_result <- @attendees do %>
       <% selected_player = Integer.to_string(attendee_result.player_id) == @selected_player_id %>
       <tr>
         <th scope="row">
-          <%= if selected_player do %>
+          <%= if selected_player && !is_historical_game do %>
             <%= render("cash_out_player_button.html",
                   game_night_id: @game_night.id,
                   player_id: -1,
@@ -35,7 +36,7 @@
         <td>
           <%= attendee_result.chips / 100 %>
         </td>
-        <%= if selected_player do %>
+        <%= if selected_player && !is_historical_game do %>
           <td colspan="2">
             <a href="/attendee_result/<%= attendee_result.id %>/add/1000" >
               <span class="btn btn-success ">
@@ -95,12 +96,15 @@
     </tr>
   </tbody>
 </table>
-<a href="<%= @mailto_link %>" >
-  <span class="btn btn-success ">
-    Send Email with Results
-  </span>
-</a>
-<p></p>
-<textarea rows="9" cols="80">
-  <%= @mailto_link %>
-</textarea>
+
+<%= if !is_historical_game do %>
+  <a href="<%= @mailto_link %>" >
+    <span class="btn btn-success ">
+      Send Email with Results
+    </span>
+  </a>
+  <p></p>
+  <textarea rows="9" cols="80">
+    <%= @mailto_link %>
+  </textarea>
+<%= end %>
