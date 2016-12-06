@@ -32,7 +32,8 @@ defmodule PhoenixPoker.Mixfile do
         :ueberauth_identity,
         :ueberauth_slack,
         :ueberauth_twitter,
-        :timex
+        :timex,
+        :bamboo
       ]
     ]
   end
@@ -59,7 +60,9 @@ defmodule PhoenixPoker.Mixfile do
      {:ueberauth_identity, "~> 0.2"},
      {:ueberauth_slack, "~> 0.2"},
      {:ueberauth_twitter, "~> 0.2"},
-     {:timex, "~> 3.0"}
+     {:timex, "~> 3.0"},
+     {:bamboo, "~> 0.7"},
+     {:bamboo_smtp, "~> 1.2.1"}
 
      #{:dogma, ">= 0.0.0", only: [:dev, :test]}
    ]

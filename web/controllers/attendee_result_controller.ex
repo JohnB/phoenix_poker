@@ -5,6 +5,7 @@ defmodule PhoenixPoker.AttendeeResultController do
   alias PhoenixPoker.AttendeeResult
   alias PhoenixPoker.Player
   alias PhoenixPoker.GameNightController
+  alias PhoenixPoker.Mailer
   import PhoenixPoker.Utils, only: [yyyymmdd_now: 0, mailto_link: 1]
   
   def index(conn, _params) do
@@ -109,6 +110,8 @@ defmodule PhoenixPoker.AttendeeResultController do
   end
 
   def subtract_chips(conn, %{"id" => id, "cents" => cents}) do
+    PhoenixPoker.Email.welcome_text_email("john.baylor@gmail.com") |> Mailer.deliver_now
+    
     add_chips(conn, %{"id" => id, "cents" => "-" <> cents})
   end
 end

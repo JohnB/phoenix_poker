@@ -30,7 +30,17 @@ import_config "#{Mix.env}.exs"
 config :phoenix, :generators,
   migration: true,
   binary_id: false
-
+  
+config :phoenix_poker, PhoenixPoker.Mailer,
+  adapter: Bamboo.SMTPAdapter,
+  server: "email-smtp.us-west-2.amazonaws.com",
+  port: 25,
+  username: System.get_env("SMTP_USERNAME"),
+  password: System.get_env("SMTP_PASSWORD"),
+  tls: :if_available, # can be `:always` or `:never`
+  ssl: false, # can be `true`
+  retries: 1
+  
 config :ueberauth, Ueberauth,
   providers: [
     facebook: { Ueberauth.Strategy.Facebook, [
