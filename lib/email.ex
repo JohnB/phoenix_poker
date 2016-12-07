@@ -22,7 +22,7 @@ defmodule PhoenixPoker.Email do
     new_email
     |> to(emails)
     |> from("john.baylor@gmail.com")
-    |> subject("Poker Results (SES): #{game_night.yyyymmdd}")
+    |> subject("DEBUG Poker Results (SES): #{game_night.yyyymmdd}")
     |> text_body(body)
   end
 
