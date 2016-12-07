@@ -31,13 +31,16 @@ config :phoenix, :generators,
   migration: true,
   binary_id: false
   
+# See https://us-west-2.console.aws.amazon.com/ses/home?region=us-west-2#smtp-settings:
+# For what Amazon Simple Email Service allows.
+# See also: https://www.google.com/search?q=standard+SMTP+ports&oq=standard+SMTP+ports&aqs=chrome..69i57j0.6194j0j7&sourceid=chrome&ie=UTF-8
 config :phoenix_poker, PhoenixPoker.Mailer,
   adapter: Bamboo.SMTPAdapter,
   server: "email-smtp.us-west-2.amazonaws.com",
-  port: 25,
+  port: 587, # or 25, or 587,
   username: System.get_env("SMTP_USERNAME"),
   password: System.get_env("SMTP_PASSWORD"),
-  tls: :if_available, # can be `:always` or `:never`
+  tls: :always, # can be `:always`, ':if_available' or `:never`
   ssl: false, # can be `true`
   retries: 1
   
