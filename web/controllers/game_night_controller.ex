@@ -5,6 +5,7 @@ defmodule PhoenixPoker.GameNightController do
   alias PhoenixPoker.Player
   alias PhoenixPoker.AttendeeResult
   import PhoenixPoker.Utils, only: [yyyymmdd_now: 0, mailto_link: 1]
+  alias PhoenixPoker.Mailer
 
   def index(conn, _params) do
     game_nights = Repo.all(GameNight)
@@ -130,8 +131,14 @@ defmodule PhoenixPoker.GameNightController do
     )
   end
 
-  def send_results(conn, %{"id" => id, "cash_out" => player_ids}) do
-    game_night = Repo.get!(GameNight, id)
+  def send_results(conn, %{"id" => id}) do
+    game_night = GameNight
+                 |> Repo.get!(id)
+                 |> Repo.preload([:attendee_results, attendee_results: :player])
+    
+    PhoenixPoker.Email.poker_results_email(game_night)
+    |> Mailer.deliver_now
+
     players = Repo.all(Player)
     render(conn, "send_results.html", game_night: game_night, players: players)
   end

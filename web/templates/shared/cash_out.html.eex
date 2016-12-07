@@ -98,9 +98,15 @@
 </table>
 
 <%= if !is_historical_game do %>
+  <a href="/game_nights/send_results/<%= @game_night.id %>" >
+    <span class="btn btn-success ">
+      Results (SES)
+    </span>
+  </a>
+  <p></p>
   <a href="<%= @mailto_link %>" >
     <span class="btn btn-success ">
-      Send Email with Results
+      Results (mailto)
     </span>
   </a>
   <p></p>

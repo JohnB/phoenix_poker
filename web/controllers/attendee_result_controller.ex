@@ -110,8 +110,6 @@ defmodule PhoenixPoker.AttendeeResultController do
   end
 
   def subtract_chips(conn, %{"id" => id, "cents" => cents}) do
-    PhoenixPoker.Email.welcome_text_email("john.baylor@gmail.com") |> Mailer.deliver_now
-    
     add_chips(conn, %{"id" => id, "cents" => "-" <> cents})
   end
 end
