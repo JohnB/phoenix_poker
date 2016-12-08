@@ -1,2 +1,4 @@
-/Users/john/dev/phoenix_poker/web/templates/game_night/send_results.html.eex
-
+<h1>Email Sent!</h1>
+<h2>
+  <a href="/">Back to root</a>
+</h2>

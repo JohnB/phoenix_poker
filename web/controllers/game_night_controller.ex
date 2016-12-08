@@ -103,9 +103,9 @@ defmodule PhoenixPoker.GameNightController do
       game_night: game_night,
       attendees: GameNight.sorted_attendees(game_night),
       selected_player_id: -1,
-      total_chips: 123,
-      exact_cents: 23456,
-      rounded_1_cents: 34500,
+      total_chips: 0.0,
+      exact_cents: 0,
+      rounded_1_cents: 0,
       mailto_link: mailto_link(game_night)
     )
   end
