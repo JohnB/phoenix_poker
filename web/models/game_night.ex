@@ -1,5 +1,6 @@
 defmodule PhoenixPoker.GameNight do
   use PhoenixPoker.Web, :model
+  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0]
   
   schema "game_nights" do
     field :yyyymmdd, :integer
@@ -23,4 +24,9 @@ defmodule PhoenixPoker.GameNight do
   def sorted_attendees(game_night) do
     Enum.sort(game_night.attendee_results, &(&1.player.nickname < &2.player.nickname) )
   end
+  
+  def in_the_past(game_night) do
+    game_night.yyyymmdd < PhoenixPoker.Utils.yyyymmdd_now()
+  end
+
 end

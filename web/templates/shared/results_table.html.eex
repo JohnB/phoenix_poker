@@ -1,0 +1,91 @@
+<table class="table">
+  <thead>
+    <tr>
+      <th>Player</th>
+      <th>Chips</th>
+      <th>Exact</th>
+      <th>$1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= for attendee_result <- @attendees do %>
+      <% selected_player = Integer.to_string(attendee_result.player_id) == @selected_player_id %>
+      <tr>
+        <th scope="row">
+          <%= if selected_player && !@historical_game do %>
+            <%= render("cash_out_player_button.html",
+                  game_night_id: @game_night.id,
+                  player_id: -1,
+                  nickname: attendee_result.player.nickname,
+                  classname: "btn-primary") %>
+          <%= else %>
+            <%= render("cash_out_player_button.html",
+                  game_night_id: @game_night.id,
+                  player_id: attendee_result.player_id,
+                  nickname: attendee_result.player.nickname,
+                  classname: "btn-default") %>
+          <%= end %>
+        </th>
+        <td>
+          <%= Float.to_string(attendee_result.chips / 100, decimals: 2) %>
+        </td>
+        <%= if selected_player && !@historical_game do %>
+          <td colspan="2">
+            <a href="/attendee_result/<%= attendee_result.id %>/add/1000" >
+              <span class="btn btn-success ">
+                + 10
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
+              <span class="btn btn-success ">
+                + 5
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/add/100" >
+              <span class="btn btn-success ">
+                + 1
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/add/025" >
+              <span class="btn btn-success ">
+                +25c
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/subtract/100" >
+              <span class="btn btn-danger ">
+                - 1
+              </span>
+            </a>
+            <a href="/attendee_result/<%= attendee_result.id %>/subtract/500" >
+              <span class="btn btn-danger ">
+                - 5
+              </span>
+            </a>
+          </td>
+        <%= else %>
+          <td>
+            <%= dollars_n_cents(attendee_result.exact_cents) %>
+          </td>
+          <td>
+            $<%= round(attendee_result.rounded_cents / 100) %>
+          </td>
+        <%= end %>
+      </tr>
+    <%= end %>
+    
+    <tr>
+      <td>
+        TOTALS:
+      </td>
+      <td>
+        <%= Float.to_string(@total_chips, decimals: 2) %>
+      </td>
+      <td>
+        <%= dollars_n_cents(@exact_cents) %>
+      </td>
+      <td>
+        $<%= round(@rounded_1_cents / 100) %>
+      </td>
+    </tr>
+  </tbody>
+</table>
