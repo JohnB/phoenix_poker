@@ -14,11 +14,11 @@ defmodule PhoenixPoker.Email do
     emails = Enum.map(game_night.attendee_results, fn(a_r) ->
       a_r.player.email
     end)
-    |> Enum.join(",")
     
     text = Enum.sort(game_night.attendee_results, &(chips_n_name(&1) < chips_n_name(&2)) )
     |> Enum.map(fn(a_r) -> email_row(a_r) end)
     |> Enum.join("\n")
+    IO.puts("emails: " <> Enum.join(emails, ",") <> "!!!")
     
     base_email
     |> to(emails)
