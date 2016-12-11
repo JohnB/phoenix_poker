@@ -92,11 +92,13 @@ defmodule PhoenixPoker.AttendeeResultController do
         rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
         render(conn, PhoenixPoker.SharedView, "cash_out.html",
                   game_night: game_night,
+                  hostname: '',
                   attendees: GameNight.sorted_attendees(game_night),
                   selected_player_id: Integer.to_string(attendee_result.player_id),
                   total_chips: total_chips / 100,
                   exact_cents: attendee_result.exact_cents,
                   rounded_1_cents: rounded_1_cents,
+                  historical_game: false,
                   mailto_link: mailto_link(game_night)
                   )
 

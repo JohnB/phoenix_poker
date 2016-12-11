@@ -9,19 +9,21 @@
   </thead>
   <tbody>
     <%= for attendee_result <- @attendees do %>
-      <% selected_player = Integer.to_string(attendee_result.player_id) == @selected_player_id %>
+      <% selected_player = (Integer.to_string(attendee_result.player_id) == @selected_player_id) %>
       <tr>
         <th scope="row">
           <%= if selected_player && !@historical_game do %>
             <%= render("cash_out_player_button.html",
                   game_night_id: @game_night.id,
                   player_id: -1,
+                  hostname: @hostname,
                   nickname: attendee_result.player.nickname,
                   classname: "btn-primary") %>
           <%= else %>
             <%= render("cash_out_player_button.html",
                   game_night_id: @game_night.id,
                   player_id: attendee_result.player_id,
+                  hostname: @hostname,
                   nickname: attendee_result.player.nickname,
                   classname: "btn-default") %>
           <%= end %>

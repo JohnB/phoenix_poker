@@ -7,15 +7,16 @@
 <%= render("results_table.html",
       game_night: @game_night,
       player_id: -1,
+      hostname: @hostname,
       attendees: @attendees,
       total_chips: @total_chips,
       exact_cents: @exact_cents,
       rounded_1_cents: @rounded_1_cents,
-      historical_game: @historical_game
+      historical_game: @historical_game,
+      selected_player_id: @selected_player_id
       ) %>
 
-
-<%= if !GameNight.in_the_past(@game_night) do %>
+<%= if !@historical_game do %>
   <a href="/game_nights/send_results/<%= @game_night.id %>" >
     <span class="btn btn-success ">
       Results (SES)

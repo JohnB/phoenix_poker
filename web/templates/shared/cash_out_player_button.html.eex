@@ -1,3 +1,3 @@
-<a href="/game_nights/cash_out/<%= @game_night_id %>/select/<%= @player_id %>#selected" >
+<a href="<%= @hostname %>/game_nights/cash_out/<%= @game_night_id %>/select/<%= @player_id %>#selected" >
   <span class="btn <%= @classname %>"><%= @nickname %></span>
 </a >

@@ -101,6 +101,7 @@ defmodule PhoenixPoker.GameNightController do
             
     render(conn, PhoenixPoker.SharedView, "cash_out.html",
       game_night: game_night,
+      hostname: '',
       attendees: GameNight.sorted_attendees(game_night),
       historical_game: GameNight.in_the_past(game_night),
       selected_player_id: -1,
@@ -123,6 +124,7 @@ defmodule PhoenixPoker.GameNightController do
 
     render(conn, PhoenixPoker.SharedView, "cash_out.html",
       game_night: game_night,
+      hostname: '',
       attendees: GameNight.sorted_attendees(game_night),
       historical_game: GameNight.in_the_past(game_night),
       selected_player_id: player_id,
@@ -138,7 +140,8 @@ defmodule PhoenixPoker.GameNightController do
                  |> Repo.get!(id)
                  |> Repo.preload([:attendee_results, attendee_results: :player])
     
-    PhoenixPoker.Email.poker_results_email(game_night)
+    hostname = PhoenixPoker.Router.Helpers.url(conn)
+    PhoenixPoker.Email.poker_results_email(game_night, hostname)
     |> Mailer.deliver_now
 
     players = Repo.all(Player)
