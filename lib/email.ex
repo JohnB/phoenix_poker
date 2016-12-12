@@ -35,6 +35,7 @@ defmodule PhoenixPoker.Email do
                 total_chips: Utils.total_chips(game_night) / 100,
                 exact_cents: Utils.exact_cents(game_night),
                 rounded_1_cents: Utils.rounded_1_cents(game_night),
+                chips_color: Utils.chips_color(game_night),
                 historical_game: true}
     )
   end

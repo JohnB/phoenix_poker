@@ -75,11 +75,11 @@
       </tr>
     <%= end %>
     
-    <tr>
+    <tr class="total_emphasis">
       <td>
         TOTALS:
       </td>
-      <td>
+      <td class="<%= @chips_color %>">
         <%= Float.to_string(@total_chips, decimals: 2) %>
       </td>
       <td>

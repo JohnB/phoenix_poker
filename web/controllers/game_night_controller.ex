@@ -109,6 +109,7 @@ defmodule PhoenixPoker.GameNightController do
       total_chips: 0.0,
       exact_cents: 0,
       rounded_1_cents: 0,
+      chips_color: "",
       mailto_link: mailto_link(game_night)
     )
   end
@@ -127,6 +128,7 @@ defmodule PhoenixPoker.GameNightController do
       total_chips: Utils.total_chips(game_night) / 100,
       exact_cents: Utils.exact_cents(game_night),
       rounded_1_cents: Utils.rounded_1_cents(game_night),
+      chips_color: Utils.chips_color(game_night),
       mailto_link: mailto_link(game_night)
     )
   end

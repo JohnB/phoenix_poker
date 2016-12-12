@@ -3,6 +3,14 @@ table {
     margin: 0;
 }
 
+.total_emphasis {
+    font-weight: bold;
+}
+
+.chips_too_low {
+    background-color: red;
+}
+
 .player-selection {
     background-color: gray;
 

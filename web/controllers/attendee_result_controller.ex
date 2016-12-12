@@ -6,7 +6,8 @@ defmodule PhoenixPoker.AttendeeResultController do
   alias PhoenixPoker.Player
   alias PhoenixPoker.GameNightController
   alias PhoenixPoker.Mailer
-  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0, mailto_link: 1]
+  alias PhoenixPoker.Utils
+  import PhoenixPoker.Utils
   
   def index(conn, _params) do
     attendee_results = Repo.all(AttendeeResult)
@@ -99,6 +100,7 @@ defmodule PhoenixPoker.AttendeeResultController do
                   exact_cents: attendee_result.exact_cents,
                   rounded_1_cents: rounded_1_cents,
                   historical_game: false,
+                  chips_color: Utils.chips_color(game_night),
                   mailto_link: mailto_link(game_night)
                   )
 
