@@ -71,7 +71,7 @@ defmodule PhoenixPoker.GameNightController do
       cash_out_player(conn, %{"id" => id, "player_id" => -1})
     end
     
-    players = Repo.all(Player)
+    players = Repo.all(from p in Player, order_by: p.nickname)
     render(conn, "current_attendance.html", game_night: game_night, players: players)
   end
   
