@@ -29,6 +29,18 @@ defmodule PhoenixPoker.Utils do
     "&body=" <> body <> ";"
   end
   
+  def total_chips(game_night) do
+    Enum.map(game_night.attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum
+  end
+  
+  def exact_cents(game_night) do
+    Enum.map(game_night.attendee_results, fn(a_r) -> a_r.exact_cents end) |> Enum.sum
+  end
+  
+  def rounded_1_cents(game_night) do
+    Enum.map(game_night.attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
+  end
+  
   # To get chips ordered *descending* but names *ascending* we subtract
   # from a huge number so we can sort it all *ascending*.
   def chips_n_name(a_r) do

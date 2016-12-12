@@ -1,10 +1,11 @@
 defmodule PhoenixPoker.GameNightController do
   use PhoenixPoker.Web, :controller
 
+  import PhoenixPoker.Utils
+  alias PhoenixPoker.Utils
   alias PhoenixPoker.GameNight
   alias PhoenixPoker.Player
   alias PhoenixPoker.AttendeeResult
-  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0, mailto_link: 1]
   alias PhoenixPoker.Mailer
 
   def index(conn, _params) do
@@ -117,20 +118,15 @@ defmodule PhoenixPoker.GameNightController do
                  |> Repo.get!(id)
                  |> Repo.preload([:attendee_results, attendee_results: :player])
 
-    attendee_results = game_night.attendee_results
-    total_chips = Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum
-    exact_cents = Enum.map(attendee_results, fn(a_r) -> a_r.exact_cents end) |> Enum.sum
-    rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
-
     render(conn, PhoenixPoker.SharedView, "cash_out.html",
       game_night: game_night,
       hostname: '',
       attendees: GameNight.sorted_attendees(game_night),
       historical_game: GameNight.in_the_past(game_night),
       selected_player_id: player_id,
-      total_chips: total_chips / 100,
-      exact_cents: exact_cents,
-      rounded_1_cents: rounded_1_cents,
+      total_chips: Utils.total_chips(game_night) / 100,
+      exact_cents: Utils.exact_cents(game_night),
+      rounded_1_cents: Utils.rounded_1_cents(game_night),
       mailto_link: mailto_link(game_night)
     )
   end
