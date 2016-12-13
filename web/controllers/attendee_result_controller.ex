@@ -5,7 +5,6 @@ defmodule PhoenixPoker.AttendeeResultController do
   alias PhoenixPoker.AttendeeResult
   alias PhoenixPoker.Player
   alias PhoenixPoker.GameNightController
-  alias PhoenixPoker.Mailer
   alias PhoenixPoker.Utils
   import PhoenixPoker.Utils
   

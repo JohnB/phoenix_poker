@@ -1,6 +1,5 @@
 defmodule PhoenixPoker.GameNight do
   use PhoenixPoker.Web, :model
-  import PhoenixPoker.Utils, only: [yyyymmdd_now: 0]
   
   schema "game_nights" do
     field :yyyymmdd, :integer
