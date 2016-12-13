@@ -50,6 +50,7 @@ defmodule PhoenixPoker.Web do
       use Phoenix.HTML
 
       import PhoenixPoker.Router.Helpers
+      import PhoenixPoker.LoginHelper
     end
   end
 

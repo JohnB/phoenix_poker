@@ -1,65 +1,35 @@
 <div class="jumbotron">
-  <%= if @current_user do %>
-    <h3>Welcome, <%= @current_user.name %>, to Phoenix Poker!</h3>
-  
-    <div class="btn-group" data-toggle="buttons">
-      <%= for game <- @future do %>
-        <p>
-        <%= link(game.yyyymmdd, to: "/game_nights/#{game.id}" ) %>
-        </p>
-      <% end %>
-    </div>
-    <br />
-    <h2>
-      <%= link("TONIGHT: #{@yyyymmdd}", to: "/game_nights/take_attendance/#{@yyyymmdd}" ) %>
-    </h2>
-    <div class="btn-group" data-toggle="buttons">
-      <%= for game <- @past do %>
-        <p>
-        <%= link(game.yyyymmdd, to: "/game_nights/current_attendance/#{game.id}" ) %>
-        </p>
-      <% end %>
-    </div>
+  <h3>Welcome, <%= current_user(@conn).name %>, to Phoenix Poker!</h3>
 
-    <br />
-    <img src="<%= @current_user.avatar %>" class="img-circle"/>
-    <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
-    <br>
-  
-    <%= if @current_user.name == "John Baylor" do %>
-      <%= link "Add Player", to: player_path(@conn, :new) %>
-      |
-      <%= link "Game Nights", to: game_night_path(@conn, :index) %>
-      |
-      (only visible to John)
+  <div class="btn-group" data-toggle="buttons">
+    <%= for game <- @future do %>
+      <p>
+      <%= link(game.yyyymmdd, to: "/game_nights/#{game.id}" ) %>
+      </p>
     <% end %>
-  
-  <% else %>
-    <a class="btn btn-primary btn-lg" href="/auth/github">
-      <i class="fa fa-github"></i>
-      Sign in with GitHub
-    </a>
+  </div>
+  <br />
+  <h2>
+    <%= link("TONIGHT: #{@yyyymmdd}", to: "/game_nights/take_attendance/#{@yyyymmdd}" ) %>
+  </h2>
+  <div class="btn-group" data-toggle="buttons">
+    <%= for game <- @past do %>
+      <p>
+      <%= link(game.yyyymmdd, to: "/game_nights/current_attendance/#{game.id}" ) %>
+      </p>
+    <% end %>
+  </div>
 
-    <a class="btn btn-primary btn-lg" href="/auth/facebook">
-      <i class="fa fa-facebook"></i>
-      Sign in with Facebook
-    </a>
+  <br />
+  <img src="<%= current_user(@conn).avatar %>" class="img-circle"/>
+  <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
+  <br>
 
-    <a class="btn btn-primary btn-lg" href="/auth/google">
-      <i class="fa fa-google"></i>
-      Sign in with Google
-    </a>
-
-    <a class="btn btn-primary btn-lg" href="/auth/twitter">
-      <i class="fa fa-twitter"></i>
-      Sign in with Twitter
-    </a>
-
-    <!--
-    <a class="btn btn-primary btn-lg" href="/auth/link">
-      <i class="fa fa-link"></i>
-      Just send me a Link!
-    </a>
-    -->
+  <%= if current_user(@conn).name == "John Baylor" do %>
+    <%= link "Add Player", to: player_path(@conn, :new) %>
+    |
+    <%= link "Game Nights", to: game_night_path(@conn, :index) %>
+    |
+    (only visible to John)
   <% end %>
 </div>
