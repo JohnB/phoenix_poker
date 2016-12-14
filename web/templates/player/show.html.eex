@@ -12,6 +12,11 @@
     <%= @player.email %>
   </li>
 
+  <li>
+    <strong>Verified:</strong>
+    <%= @player.email_verified %>
+  </li>
+
 </ul>
 
 <%= link "Edit", to: player_path(@conn, :edit, @player) %>

@@ -12,18 +12,24 @@ defmodule PhoenixPoker.Email do
   end
   
   def poker_results_email(game_night, hostname) do
-    emails = Enum.map(game_night.attendee_results, fn(a_r) ->
+    verified_or_not = Enum.group_by(game_night.attendee_results, fn(a_r) ->
+      a_r.player.email_verified
+    end)
+
+    emails = Enum.map(verified_or_not[:true], fn(a_r) ->
+      a_r.player.email
+    end)
+    unverified_emails = Enum.map(verified_or_not[:false], fn(a_r) ->
       a_r.player.email
     end)
     
     text = Enum.sort(game_night.attendee_results, &(Utils.chips_n_name(&1) < Utils.chips_n_name(&2)) )
     |> Enum.map(fn(a_r) -> Utils.email_row(a_r) end)
     |> Enum.join("\n")
-    IO.puts("emails: " <> Enum.join(emails, ",") <> "!!!")
     
     base_email
     |> to(emails)
-    |> subject("Poker Results for #{game_night.yyyymmdd}")
+    |> subject("Poker Results for #{game_night.yyyymmdd} (fwd to #{inspect(unverified_emails)})")
     |> text_body(text)
     |> render("results_table.html", %{
                 game_night: game_night,

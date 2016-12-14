@@ -4,6 +4,7 @@ defmodule PhoenixPoker.Player do
   schema "players" do
     field :nickname, :string
     field :email, :string
+    field :email_verified, :boolean
 
     has_many :attendee_results, PhoenixPoker.AttendeeResult
 
@@ -15,7 +16,7 @@ defmodule PhoenixPoker.Player do
   """
   def changeset(struct, params \\ %{}) do
     struct
-    |> cast(params, [:nickname, :email])
-    |> validate_required([:nickname, :email])
+    |> cast(params, [:nickname, :email, :email_verified])
+    |> validate_required([:nickname, :email, :email_verified])
   end
 end
