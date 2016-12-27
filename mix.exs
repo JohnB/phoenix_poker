@@ -62,7 +62,7 @@ defmodule PhoenixPoker.Mixfile do
      {:ueberauth_twitter, "~> 0.2"},
      # from git@github.com:johnb/ueberauth_instagram.git
      # {:ueberauth_instagram, git: "git@github.com:johnb/ueberauth_instagram.git"},
-     {:ueberauth_instagram, path: "deps/ueberauth_instagram"},
+     {:ueberauth_instagram, path: "web/vendor/ueberauth_instagram"},
      {:timex, "~> 3.0"},
      {:bamboo, "~> 0.7"},
      {:bamboo_smtp, "~> 1.2.1"}

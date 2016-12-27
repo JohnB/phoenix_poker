@@ -40,6 +40,11 @@
           Sign in with Twitter
         </a>
     
+        <a class="btn btn-primary btn-lg" href="/auth/instagram">
+          <i class="fa fa-instagram"></i>
+          Sign in with Instagram (won't actually work)
+        </a>
+    
         <!--
         <a class="btn btn-primary btn-lg" href="/auth/link">
           <i class="fa fa-link"></i>
