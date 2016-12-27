@@ -60,7 +60,6 @@ defmodule PhoenixPoker.Mixfile do
      {:ueberauth_identity, "~> 0.2"},
      {:ueberauth_slack, "~> 0.2"},
      {:ueberauth_twitter, "~> 0.2"},
-     {:ueberauth_instagram, git: "git@github.com:johnb/ueberauth_instagram.git"},
      {:timex, "~> 3.0"},
      {:bamboo, "~> 0.7"},
      {:bamboo_smtp, "~> 1.2.1"}
