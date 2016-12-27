@@ -14,7 +14,7 @@
 
   <li>
     <strong>Verified:</strong>
-    <%= @player.email_verified %>
+    <%= inspect(@player.email_verified) %>
   </li>
 
 </ul>

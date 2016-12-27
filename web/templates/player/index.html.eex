@@ -11,7 +11,10 @@
   <tbody>
 <%= for player <- @players do %>
     <tr>
-      <td><%= player.nickname %></td>
+      <td>
+        <%= player.nickname %>
+        (verified: <%= inspect(player.email_verified) %>)
+      </td>
 
       <td class="text-right">
         <%= link "Show", to: player_path(@conn, :show, player), class: "btn btn-default btn-xs" %>
