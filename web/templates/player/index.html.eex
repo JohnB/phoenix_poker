@@ -12,8 +12,9 @@
 <%= for player <- @players do %>
     <tr>
       <td>
-        <%= player.nickname %>
-        (verified: <%= inspect(player.email_verified) %>)
+        <span class="verified-<%= inspect(player.email_verified) %>">
+          <%= player.nickname %>
+        </span>
       </td>
 
       <td class="text-right">

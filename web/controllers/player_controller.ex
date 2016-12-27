@@ -4,7 +4,7 @@ defmodule PhoenixPoker.PlayerController do
   alias PhoenixPoker.Player
 
   def index(conn, _params) do
-    players = Repo.all(Player)
+    players = Repo.all(from p in Player, order_by: p.nickname)
     render(conn, "index.html", players: players)
   end
 

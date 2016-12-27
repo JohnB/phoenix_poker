@@ -11,6 +11,10 @@ table {
     background-color: red;
 }
 
+.verified-true {
+    background-color: lightgreen;
+}
+
 .player-selection {
     background-color: gray;
 
