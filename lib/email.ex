@@ -15,13 +15,16 @@ defmodule PhoenixPoker.Email do
     verified_or_not = Enum.group_by(game_night.attendee_results, fn(a_r) ->
       a_r.player.email_verified
     end)
+    IO.puts("DEBUG verified_or_not: " <> inspect(verified_or_not))
 
     emails = Enum.map(verified_or_not[:true], fn(a_r) ->
       a_r.player.email
     end)
+    IO.puts("DEBUG emails: " <> inspect(emails))
     unverified_emails = Enum.map(verified_or_not[:false], fn(a_r) ->
       a_r.player.email
     end)
+    IO.puts("DEBUG unverified_emails: " <> inspect(unverified_emails))
     
     text = Enum.sort(game_night.attendee_results, &(Utils.chips_n_name(&1) < Utils.chips_n_name(&2)) )
     |> Enum.map(fn(a_r) -> Utils.email_row(a_r) end)
