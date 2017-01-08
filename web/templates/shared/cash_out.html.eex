@@ -17,6 +17,10 @@
       selected_player_id: @selected_player_id
       ) %>
 
+<%= if can_access_scaffolding?(@conn) || !@historical_game do %>
+  <%= if @historical_game do %>
+    <pre>can_access_scaffolding?() == <%= inspect(can_access_scaffolding?(@conn)) %> </pre>
+  <%= end %>
   <a href="/game_nights/send_results/<%= @game_night.id %>" >
     <span class="btn btn-success ">
       Results (SES)
@@ -32,5 +36,4 @@
   <textarea rows="9" cols="80">
     <%= @mailto_link %>
   </textarea>
-<%= if !@historical_game do %>
 <%= end %>

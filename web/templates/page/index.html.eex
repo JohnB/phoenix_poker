@@ -25,11 +25,11 @@
   <%= link "Logout", to: auth_path(@conn, :delete), method: :delete, class: "btn btn-danger" %>
   <br>
 
-  <%= if current_user(@conn).name == "John Baylor" do %>
+  <%= if can_access_scaffolding?(@conn) do %>
+    <pre>can_access_scaffolding?() == <%= inspect(can_access_scaffolding?(@conn)) %> </pre>
     <%= link "Add Player", to: player_path(@conn, :new) %>
     |
     <%= link "Game Nights", to: game_night_path(@conn, :index) %>
     |
-    (only visible to John)
   <% end %>
 </div>
