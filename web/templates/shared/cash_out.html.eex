@@ -17,9 +17,9 @@
       selected_player_id: @selected_player_id
       ) %>
 
-<%= if can_access_scaffolding?(@conn) || !@historical_game do %>
+<%= if can_resend_emails?(@conn) || !@historical_game do %>
   <%= if @historical_game do %>
-    <pre>can_access_scaffolding?() == <%= inspect(can_access_scaffolding?(@conn)) %> </pre>
+    <pre>can_resend_emails?() == <%= inspect(can_resend_emails?(@conn)) %> </pre>
   <%= end %>
   <a href="/game_nights/send_results/<%= @game_night.id %>" >
     <span class="btn btn-success ">
