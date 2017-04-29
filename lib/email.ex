@@ -17,11 +17,11 @@ defmodule PhoenixPoker.Email do
     end)
     IO.puts("DEBUG verified_or_not: " <> inspect(verified_or_not))
 
-    emails = Enum.map(verified_or_not[:true], fn(a_r) ->
+    emails = Enum.map(verified_or_not[:true] || [], fn(a_r) ->
       a_r.player.email
     end)
     IO.puts("DEBUG emails: " <> inspect(emails))
-    unverified_emails = Enum.map(verified_or_not[:false], fn(a_r) ->
+    unverified_emails = Enum.map(verified_or_not[:false] || [], fn(a_r) ->
       a_r.player.email
     end)
     IO.puts("DEBUG unverified_emails: " <> inspect(unverified_emails))
