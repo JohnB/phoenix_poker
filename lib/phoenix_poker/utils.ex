@@ -12,23 +12,6 @@ defmodule PhoenixPoker.Utils do
     '$' ++ :erlang.float_to_binary(cents / 100, decimals: 2)
   end
 
-  def mailto_link(game_night) do
-    subj = "Poker Results: #{game_night.yyyymmdd}"
-
-    emails = Enum.map(game_night.attendee_results, fn(a_r) ->
-      a_r.player.email
-    end)
-    |> Enum.join(",")
-    
-    body = Enum.sort(game_night.attendee_results, &(chips_n_name(&1) < chips_n_name(&2)) )
-    |> Enum.map(fn(a_r) -> email_row(a_r) end)
-    |> Enum.join("\n")
-
-    "mailto:" <> emails <>
-    "?subject=" <> subj <>
-    "&body=" <> body <> ";"
-  end
-  
   # Return the number of chips (in cents) counted by all players
   def total_chips(game_night) do
     Enum.map(game_night.attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum

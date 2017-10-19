@@ -26,14 +26,4 @@
       Results (SES)
     </span>
   </a>
-  <p></p>
-  <a href="<%= @mailto_link %>" >
-    <span class="btn btn-success ">
-      Results (mailto)
-    </span>
-  </a>
-  <p></p>
-  <textarea rows="9" cols="80">
-    <%= @mailto_link %>
-  </textarea>
 <%= end %>

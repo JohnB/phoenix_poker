@@ -99,8 +99,7 @@ defmodule PhoenixPoker.AttendeeResultController do
                   exact_cents: attendee_result.exact_cents,
                   rounded_1_cents: rounded_1_cents,
                   historical_game: false,
-                  chips_color: Utils.chips_color(game_night),
-                  mailto_link: mailto_link(game_night)
+                  chips_color: Utils.chips_color(game_night)
                   )
 
         GameNightController.cash_out_player(conn, %{"id" => attendee_result.game_night_id, "player_id" => attendee_result.player_id})
