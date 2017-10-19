@@ -9,7 +9,7 @@ defmodule PhoenixPoker.Utils do
   end
   
   def dollars_n_cents(cents) do
-    '$' ++ Float.to_string(cents / 100, decimals: 2)
+    '$' ++ :erlang.float_to_binary(cents / 100, decimals: 2)
   end
 
   def mailto_link(game_night) do
@@ -64,8 +64,8 @@ defmodule PhoenixPoker.Utils do
   def email_row(a_r) do
     " #{a_r.player.nickname}: $#{
       round(a_r.rounded_cents / 100)} (#{
-      Float.to_string(a_r.chips / 100, decimals: 2)} chips / $#{
-      Float.to_string(a_r.exact_cents / 100, decimals: 2)}) <br /> "
+      :erlang.float_to_binary(a_r.chips / 100, decimals: 2)} chips / $#{
+      :erlang.float_to_binary(a_r.exact_cents / 100, decimals: 2)}) <br /> "
   end
 
 end
