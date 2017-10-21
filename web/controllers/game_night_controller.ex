@@ -55,10 +55,10 @@ defmodule PhoenixPoker.GameNightController do
           |> put_flash(:info, "Failed to insert the #{yyyymmdd} game: #{inspect(changeset)}.")
           |> render("take_attendance.html", game_night: changeset, current_user: current_user)
       end
+    else
+      conn
+      |> redirect(to: game_night_path(conn, :current_attendance, game_night))
     end
-
-    conn
-    |> redirect(to: game_night_path(conn, :current_attendance, game_night))
   end
   
   def current_attendance(conn, %{"id" => id}) do
@@ -114,11 +114,12 @@ defmodule PhoenixPoker.GameNightController do
   end
   
   def cash_out_player(conn, %{"id" => id, "player_id" => player_id}) do
+    
     game_night = GameNight
                  |> Repo.get!(id)
                  |> Repo.preload([:attendee_results, attendee_results: :player])
 
-    render(conn, PhoenixPoker.SharedView, "cash_out.html",
+    render_data = %{
       game_night: game_night,
       hostname: '',
       attendees: GameNight.sorted_attendees(game_night),
@@ -128,7 +129,8 @@ defmodule PhoenixPoker.GameNightController do
       exact_cents: Utils.exact_cents(game_night),
       rounded_1_cents: Utils.rounded_1_cents(game_night),
       chips_color: Utils.chips_color(game_night)
-    )
+    }
+    render(conn, PhoenixPoker.SharedView, "cash_out.html", render_data)
   end
 
   def send_results(conn, %{"id" => id}) do

@@ -90,19 +90,20 @@ defmodule PhoenixPoker.AttendeeResultController do
 
         total_chips = max(1, Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum)
         rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
-        render(conn, PhoenixPoker.SharedView, "cash_out.html",
-                  game_night: game_night,
-                  hostname: '',
-                  attendees: GameNight.sorted_attendees(game_night),
-                  selected_player_id: Integer.to_string(attendee_result.player_id),
-                  total_chips: total_chips / 100,
-                  exact_cents: attendee_result.exact_cents,
-                  rounded_1_cents: rounded_1_cents,
-                  historical_game: false,
-                  chips_color: Utils.chips_color(game_night)
-                  )
+        selected_player_id_string = Integer.to_string(attendee_result.player_id)
 
-        GameNightController.cash_out_player(conn, %{"id" => attendee_result.game_night_id, "player_id" => attendee_result.player_id})
+        render_data = %{
+          game_night: game_night,
+          hostname: '',
+          attendees: GameNight.sorted_attendees(game_night),
+          historical_game: false,
+          selected_player_id: selected_player_id_string,
+          total_chips: total_chips / 100,
+          exact_cents: attendee_result.exact_cents,
+          rounded_1_cents: rounded_1_cents,
+          chips_color: Utils.chips_color(game_night)
+        }
+        render(conn, PhoenixPoker.SharedView, "cash_out.html", render_data)
       {:error, _} ->
         next_page = game_night_path(conn, :cash_out_player, attendee_result.game_night_id, attendee_result.player_id)
         conn
