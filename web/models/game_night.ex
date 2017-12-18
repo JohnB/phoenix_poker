@@ -20,6 +20,10 @@ defmodule PhoenixPoker.GameNight do
     |> validate_required([:yyyymmdd, :buy_in_cents])
   end
   
+  def sorted_attendees(game_night, :chips) do
+    IO.puts("\n\n\nsorting by chips\n\n\n")
+    Enum.sort(game_night.attendee_results, &(&1.chips > &2.chips) )
+  end
   def sorted_attendees(game_night) do
     Enum.sort(game_night.attendee_results, &(&1.player.nickname < &2.player.nickname) )
   end

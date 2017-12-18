@@ -77,6 +77,9 @@ defmodule PhoenixPoker.GameNightController do
   end
   
   def cash_out(conn, %{"id" => id, "cash_out" => player_ids}) do
+    # TODO: ensure this never gets called twice, so we do not
+    # erase a game's result by accident.
+    
     # Expect input like this:
     #   "cash_out" => %{"1" => "false", "2" => "true"}
     {gn_id, _} = Integer.parse(id)
@@ -100,12 +103,16 @@ defmodule PhoenixPoker.GameNightController do
     game_night = GameNight
                  |> Repo.get!(id)
                  |> Repo.preload([:attendee_results, attendee_results: :player])
-            
+    historical_game = GameNight.in_the_past(game_night)
+    attendees = if historical_game,
+      do:   GameNight.sorted_attendees(game_night, :chips),
+      else: GameNight.sorted_attendees(game_night)
+       
     render(conn, PhoenixPoker.SharedView, "cash_out.html",
       game_night: game_night,
       hostname: '',
-      attendees: GameNight.sorted_attendees(game_night),
-      historical_game: GameNight.in_the_past(game_night),
+      attendees: attendees,
+      historical_game: historical_game,
       selected_player_id: -1,
       total_chips: 0.0,
       exact_cents: 0,
@@ -119,12 +126,16 @@ defmodule PhoenixPoker.GameNightController do
     game_night = GameNight
                  |> Repo.get!(id)
                  |> Repo.preload([:attendee_results, attendee_results: :player])
+    historical_game = GameNight.in_the_past(game_night)
+    attendees = if historical_game,
+      do:   GameNight.sorted_attendees(game_night, :chips),
+      else: GameNight.sorted_attendees(game_night)
 
     render_data = %{
       game_night: game_night,
       hostname: '',
-      attendees: GameNight.sorted_attendees(game_night),
-      historical_game: GameNight.in_the_past(game_night),
+      attendees: attendees,
+      historical_game: historical_game,
       selected_player_id: player_id,
       total_chips: Utils.total_chips(game_night) / 100,
       exact_cents: Utils.exact_cents(game_night),
