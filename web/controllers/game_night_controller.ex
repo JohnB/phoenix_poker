@@ -9,7 +9,8 @@ defmodule PhoenixPoker.GameNightController do
   alias PhoenixPoker.Mailer
 
   def index(conn, _params) do
-    game_nights = Repo.all(GameNight)
+    query = from(g in GameNight, order_by: [desc: g.yyyymmdd])
+    game_nights = Repo.all(query)
     render(conn, "index.html", game_nights: game_nights)
   end
 
