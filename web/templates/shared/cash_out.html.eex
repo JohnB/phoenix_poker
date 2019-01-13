@@ -8,6 +8,7 @@
       game_night: @game_night,
       player_id: -1,
       hostname: @hostname,
+      fwd_to: [],
       attendees: @attendees,
       total_chips: @total_chips,
       exact_cents: @exact_cents,

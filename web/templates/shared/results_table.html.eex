@@ -91,3 +91,10 @@
     </tr>
   </tbody>
 </table>
+
+<%= if @fwd_to != [] do %>
+  <p>
+    Please forward to:
+    <%= Enum.join(@fwd_to, ", ") %>
+  </p>
+<%= end %>
