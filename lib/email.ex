@@ -32,12 +32,13 @@ defmodule PhoenixPoker.Email do
     
     base_email
     |> to(emails)
-    |> subject("Poker Results for #{game_night.yyyymmdd} (fwd to #{inspect(unverified_emails)})")
+    |> subject("Poker Results for #{game_night.yyyymmdd}")
     |> text_body(text)
     |> render("results_table.html", %{
                 game_night: game_night,
                 player_id: -1,
                 hostname: hostname,
+                fwd_to: unverified_emails,
                 selected_player_id: -1,
                 attendees: GameNight.sorted_attendees(game_night),
                 total_chips: Utils.total_chips(game_night) / 100,
