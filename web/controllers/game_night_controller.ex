@@ -39,6 +39,7 @@ defmodule PhoenixPoker.GameNightController do
   end
 
   def take_attendance(conn, %{"yyyymmdd" => yyyymmdd}) do
+    now = NaiveDateTime.utc_now() # add in a vain attempt to fix a weird bug
     current_user = get_session(conn, :current_user)
 
     # Attempt at find-or-create
