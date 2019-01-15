@@ -7,6 +7,7 @@ defmodule PhoenixPoker.GameNightController do
   alias PhoenixPoker.Player
   alias PhoenixPoker.AttendeeResult
   alias PhoenixPoker.Mailer
+  import NaiveDateTime
 
   def index(conn, _params) do
     query = from(g in GameNight, order_by: [desc: g.yyyymmdd])
