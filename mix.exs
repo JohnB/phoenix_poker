@@ -51,6 +51,7 @@ defmodule PhoenixPoker.Mixfile do
      {:postgrex, ">= 0.11.1", override: true},
      {:phoenix_html, "~> 2.6"},
      {:phoenix_live_reload, "~> 1.0", only: :dev},
+     {:plug_cowboy, "~> 1.0"},
      {:cowboy, "~> 1.0"},
      {:ueberauth, "~> 0.2"},
      {:oauth, github: "tim/erlang-oauth"},
