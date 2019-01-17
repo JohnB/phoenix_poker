@@ -69,10 +69,10 @@ defmodule PhoenixPoker.AttendeeResultController do
     |> redirect(to: attendee_result_path(conn, :index))
   end
 
-  def add_chips(conn, %{"id" => id, "cents" => cents}) do
-    {chips_i, _} = Integer.parse(cents)
+  def set_chipcount(conn, %{"id" => id, "chipcount" => chipcount}) do
+    {chipcount_i, _} = Integer.parse(chipcount)
     attendee_result = Repo.get!(AttendeeResult, id)
-    updated_chips = max(0, attendee_result.chips + chips_i)
+    updated_chips = chipcount_i
     changeset = AttendeeResult.changeset(attendee_result, %{chips: updated_chips})
 
     case Repo.update(changeset) do
@@ -97,7 +97,7 @@ defmodule PhoenixPoker.AttendeeResultController do
           hostname: '',
           attendees: GameNight.sorted_attendees(game_night),
           historical_game: false,
-          selected_player_id: selected_player_id_string,
+          selected_player_id: -1,
           total_chips: total_chips / 100,
           exact_cents: attendee_result.exact_cents,
           rounded_1_cents: rounded_1_cents,
@@ -110,9 +110,5 @@ defmodule PhoenixPoker.AttendeeResultController do
         |> put_flash(:info, "error adding chips.")
         |> redirect(to: next_page)
     end
-  end
-
-  def subtract_chips(conn, %{"id" => id, "cents" => cents}) do
-    add_chips(conn, %{"id" => id, "cents" => "-" <> cents})
   end
 end

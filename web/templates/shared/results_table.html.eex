@@ -28,43 +28,30 @@
                   classname: "btn-default") %>
           <%= end %>
         </th>
-        <td>
-          <%= :erlang.float_to_binary(attendee_result.chips / 100, decimals: 2) %>
-        </td>
         <%= if selected_player && !@historical_game do %>
           <td colspan="2">
-            <a href="/attendee_result/<%= attendee_result.id %>/add/1000" >
-              <span class="btn btn-success ">
-                + 10
-              </span>
-            </a>
-            <a href="/attendee_result/<%= attendee_result.id %>/add/500" >
-              <span class="btn btn-success ">
-                + 5
-              </span>
-            </a>
-            <a href="/attendee_result/<%= attendee_result.id %>/add/100" >
-              <span class="btn btn-success ">
-                + 1
-              </span>
-            </a>
-            <a href="/attendee_result/<%= attendee_result.id %>/add/025" >
-              <span class="btn btn-success ">
-                +25c
-              </span>
-            </a>
-            <a href="/attendee_result/<%= attendee_result.id %>/subtract/100" >
-              <span class="btn btn-danger ">
-                - 1
-              </span>
-            </a>
-            <a href="/attendee_result/<%= attendee_result.id %>/subtract/500" >
-              <span class="btn btn-danger ">
-                - 5
-              </span>
-            </a>
+            <form
+              class="form-search"
+              style="margin: 0;"
+              action="/attendee_result/<%= attendee_result.id %>/set_chipcount"
+            >
+              <label for="chipcount"></label>
+              <input
+                pattern="[0-9]*"
+                type="text"
+                name="chipcount"
+                maxlength="7"
+                size="7"
+                value="<%= attendee_result.chips %>"
+              />
+              &nbsp;
+              <input type="submit" value="OK" class="btn btn-primary">
+            </form>
           </td>
         <%= else %>
+          <td>
+            <%= :erlang.float_to_binary(attendee_result.chips / 100, decimals: 2) %>
+          </td>
           <td>
             <%= dollars_n_cents(attendee_result.exact_cents) %>
           </td>

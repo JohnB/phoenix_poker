@@ -38,8 +38,7 @@ defmodule PhoenixPoker.Router do
     get "/game_nights/send_results/:id", GameNightController, :send_results
     resources "/game_nights", GameNightController
 
-    get "/attendee_result/:id/add/:cents", AttendeeResultController, :add_chips
-    get "/attendee_result/:id/subtract/:cents", AttendeeResultController, :subtract_chips
+    get "/attendee_result/:id/set_chipcount", AttendeeResultController, :set_chipcount
     resources "/attendee_results", AttendeeResultController
   end
 end
