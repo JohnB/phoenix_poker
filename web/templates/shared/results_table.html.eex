@@ -18,7 +18,7 @@
                   player_id: -1,
                   hostname: @hostname,
                   nickname: attendee_result.player.nickname,
-                  classname: "btn-primary") %>
+                  classname: "btn-danger") %>
           <%= else %>
             <%= render("cash_out_player_button.html",
                   game_night_id: @game_night.id,
