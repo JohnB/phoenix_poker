@@ -36,7 +36,7 @@
               action="/attendee_result/<%= attendee_result.id %>/set_chipcount"
             >
               <label for="chipcount"></label>
-              <input
+              <input autofocus
                 pattern="[0-9]*"
                 type="text"
                 name="chipcount"
