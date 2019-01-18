@@ -3,7 +3,7 @@
 <ul>
 
   <li>
-    <strong>Yyyymmdd:</strong>
+    <strong>YYYYMMDD:</strong>
     <%= @game_night.yyyymmdd %>
   </li>
 

@@ -21,11 +21,22 @@ defmodule PhoenixPoker.GameNight do
   end
   
   def sorted_attendees(game_night, :chips) do
-    IO.puts("\n\n\nsorting by chips\n\n\n")
     Enum.sort(game_night.attendee_results, &(&1.chips > &2.chips) )
   end
   def sorted_attendees(game_night) do
-    Enum.sort(game_night.attendee_results, &(&1.player.nickname < &2.player.nickname) )
+    Enum.sort(game_night.attendee_results, &sort_lowest_then_chips_then_name/2 )
+  end
+
+  # When entering the chips, sort the already-entered from top to bottom but
+  # keep the un-set players at the top of the list.
+  def sort_lowest_then_chips_then_name(a, b) do
+    case [a.chips, b.chips] do
+      [0, 0] -> (a.player.nickname < b.player.nickname)
+      [0, _] -> true
+      [_, 0] -> false
+      [n, n] -> (a.player.nickname < b.player.nickname)
+      [_, _] -> (a.chips > b.chips)
+    end
   end
   
   def in_the_past(game_night) do
