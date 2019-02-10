@@ -4,7 +4,7 @@
   <thead>
     <tr>
       <th>YYYYMMDD</th>
-      <th>Buy in cents</th>
+      <th>Players</th>
 
       <th></th>
     </tr>
@@ -12,8 +12,12 @@
   <tbody>
 <%= for game_night <- @game_nights do %>
     <tr>
-      <td><%= game_night.yyyymmdd %></td>
-      <td><%= game_night.buy_in_cents %></td>
+      <td>
+        <%= game_night.yyyymmdd %>
+      </td>
+      <td class="players-<%= game_night.player_count %>">
+        <%= game_night.player_count %>
+      </td>
 
       <td class="text-right">
         <%= link "Show", to: game_night_path(@conn, :current_attendance, game_night), class: "btn btn-default btn-xs" %>

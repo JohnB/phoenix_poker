@@ -49,3 +49,9 @@ table {
 .decrement-chips {
     /*background-color: red;*/
 }
+
+/* most games with a small number of players are test games that can be deleted */
+.players-0, .players-1, .players-2, .players-3, .players-4 {
+    color: white;
+    background-color: red;
+}

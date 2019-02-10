@@ -4,8 +4,11 @@ defmodule PhoenixPoker.GameNight do
   schema "game_nights" do
     field :yyyymmdd, :integer
     field :buy_in_cents, :integer
+    field :player_count, :integer, virtual: true
     
     has_many :attendee_results, PhoenixPoker.AttendeeResult
+    # Why doesn't ecto have a has_many_through option?
+    # has_many :players, PhoenixPoker.Player, through: AttendeeResult
 
     timestamps()
   end
