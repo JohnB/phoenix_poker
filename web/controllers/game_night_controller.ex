@@ -13,7 +13,7 @@ defmodule PhoenixPoker.GameNightController do
       g in GameNight,
       join: ar in AttendeeResult,
       on: ar.game_night_id == g.id,
-      select: %{g | player_count: count(ar.id)},
+      select: %{g | player_count: count(ar.id), total_chips: sum(ar.chips)},
       group_by: g.id,
       order_by: [desc: g.yyyymmdd]
     )

@@ -5,6 +5,7 @@
     <tr>
       <th>YYYYMMDD</th>
       <th>Players</th>
+      <th>Chips</th>
 
       <th></th>
     </tr>
@@ -17,6 +18,9 @@
       </td>
       <td class="players-<%= game_night.player_count %>">
         <%= game_night.player_count %>
+      </td>
+      <td>
+        <%= game_night.total_chips %>
       </td>
 
       <td class="text-right">
