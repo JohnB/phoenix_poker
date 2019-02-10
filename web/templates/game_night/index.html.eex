@@ -5,7 +5,7 @@
     <tr>
       <th>YYYYMMDD</th>
       <th>Players</th>
-      <th>Chips</th>
+      <th class="chips-per-player">Chips/Player</th>
 
       <th></th>
     </tr>
@@ -19,8 +19,8 @@
       <td class="players-<%= game_night.player_count %>">
         <%= game_night.player_count %>
       </td>
-      <td>
-        <%= game_night.total_chips %>
+      <td class="chips-per-player">
+        <%= :erlang.float_to_binary(game_night.total_chips / game_night.player_count, decimals: 2) %>
       </td>
 
       <td class="text-right">
