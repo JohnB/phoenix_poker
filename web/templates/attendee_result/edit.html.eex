@@ -1,6 +1,0 @@
-<h2>Edit attendee result</h2>
-
-<%= render "form.html", changeset: @changeset,
-                        action: attendee_result_path(@conn, :update, @attendee_result) %>
-
-<%= link "Back", to: attendee_result_path(@conn, :index) %>

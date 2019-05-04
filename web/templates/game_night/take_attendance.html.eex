@@ -1,7 +1,0 @@
-<p>take attendance???</p
-<%= inspect(@game_night) %>
-<p>huh?</p
-<h3>Welcome, <%= @current_user.name %>, to Phoenix Poker!</h3>
-<h2>Here</h2
-<hr />
-<h2>Absent</h2
