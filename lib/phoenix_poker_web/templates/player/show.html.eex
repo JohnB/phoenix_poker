@@ -1,0 +1,23 @@
+<h1>Show Player</h1>
+
+<ul>
+
+  <li>
+    <strong>Nickname:</strong>
+    <%= @player.nickname %>
+  </li>
+
+  <li>
+    <strong>Email:</strong>
+    <%= @player.email %>
+  </li>
+
+  <li>
+    <strong>Email verified:</strong>
+    <%= @player.email_verified %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.player_path(@conn, :edit, @player) %></span>
+<span><%= link "Back", to: Routes.player_path(@conn, :index) %></span>

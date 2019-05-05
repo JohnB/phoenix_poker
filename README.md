@@ -12,21 +12,21 @@ rebuild from the ground up.
 * [x] Start a branch so we don't make anything worse.
 * [x] Replace entire dir with fresh Phoenix app.
 * [ ] Rebuild previous migrations to get the exact same data model.
-      * [*] Rebuild GameNights
-      * [ ] Rebuild Players
-      * [ ] Rebuild AttemdeeResults
+  * [x] Rebuild GameNights
+  * [X] Rebuild Players
+  * [ ] Rebuild AttemdeeResults
 * [ ] Re-add EuberAuth (google, twitter, github).
-      * [ ] Consider limiting to existing users.
+  * [ ] Consider limiting to existing users.
 * [ ] Restore non-CRUD UI.
-      * [ ] /game_nights should highlight probable test games
-      * [ ] Restore player selection.
-      * [ ] 
-      * [ ] Consider LiveView for the CashOut page.
-      * [ ] CashOut page.
-      * [ ]
+  * [ ] /game_nights should highlight probable test games
+  * [ ] Restore player selection.
+  * [ ] 
+  * [ ] Consider LiveView for the CashOut page.
+  * [ ] CashOut page.
+  * [ ]
 * [ ] Re-add heroku integration.
-      * [ ] Consider delaying the push to heroku if we're close to the June 7th Poken Night.
-      * [ ] Can we even re-deploy the existing master branch if we're having trouble compiling master? 
+  * [ ] Consider delaying the push to heroku if we're close to the June 7th Poken Night.
+  * [ ] Can we even re-deploy the existing master branch if we're having trouble compiling master? 
 * [ ] Merge back to master
 * [ ] Deploy to heroku
 
@@ -35,7 +35,6 @@ rebuild from the ground up.
 * Player: one who plays poker (nickname and email - both unique)
 * GameNight: the record of one night's game (date, buy-in, AttendeeResults)
 * AttendeeResult: player_id, game_night_id, chips, rounding_method, result_in_cents 
-* InvitedPlayers
 
 ## License
 

@@ -17,6 +17,7 @@ defmodule PhoenixPokerWeb.Router do
     pipe_through :browser
 
     resources "/game_nights", GameNightController
+    resources "/players", PlayerController
     get "/", PageController, :index
   end
 
