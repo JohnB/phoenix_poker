@@ -1,0 +1,122 @@
+* a714b4e john.baylor@gmail.com  (HEAD, jb_improve_sorting) Remove debug printouts. Re-sort UI by chips DESC, but with not-cashed-out players first. Capitalize YYYYMMDD. 
+* a833004 john.baylor@gmail.com  Clarify in red that the selected user's name is a cancel operation. 
+* f8bf563 john.baylor@gmail.com  Add autofocus. 
+* 551fc1d john.baylor@gmail.com  (origin/better_numeric_input, better_numeric_input) Replace +10, -5 &c buttons with ios-numeric input. 
+* f827a2a john.baylor@gmail.com  Move forwarding message from email subject to body. 
+* cf7dbbe john.baylor@gmail.com  (heroku/fckup_deps_to_get_working_on_heroku, fckup_deps_to_get_working_on_heroku) Yet another attempt to get this working on heroku again. 
+* 776743d john.baylor@gmail.com  (origin/failed_attempt_to_get_deps_working_together, failed_attempt_to_get_deps_working_together) Ugly code to order historical result pages. TODO: fix huge bug 
+* 41f8152 john.baylor@gmail.com  Fix show/edit links to show current_attendance for those nights. 
+* 71183d0 john.baylor@gmail.com  Ordered game night list - newest first. 
+* 5cdb061 john.baylor@gmail.com  Remove excess #selected at the end of some URLs. Removed duplicate rendering. 
+* e777970 john.baylor@gmail.com  Remove old mailto_link/1 now that SES works. 
+* 8850bf4 john.baylor@gmail.com  (origin/johnb_phoenix1.3, johnb_phoenix1.3) Simplistic upgrade to phoenix 1.3 Fix warnings and deprecations. See non-optional top sections of https://gist.github.com/chrismccord/71ab10d433c98b714b75c886eff17357 
+* 99dd74c john.baylor@gmail.com  Handle case when either the verified or unverified list of emails is nonexistent. 
+* 8c39682 john.baylor@gmail.com  Clarify when something is only admin-visible. (or, more precisely, scaffold-visible-level or email-resending-level) 
+* 0cb0c66 john.baylor@gmail.com  Clarify when something is only admin-visible. (or, more precisely, scaffold-level-visible) 
+* 1c89282 john.baylor@gmail.com  (origin/johnb_fix_email_error, heroku/johnb_fix_email_error, johnb_fix_email_error) Debugging for mail-sending error. 
+* 0c0c75f john.baylor@gmail.com  (nil_out_current_user_on_logout) Revert "Test heroku deploy with ueberauth_instagram (not used)." 
+* f6164fd john.baylor@gmail.com  Revert "Buildpack: always_rebuild=true (to see if I can deploy to heroku)" 
+* 6198bb3 john.baylor@gmail.com  Revert "Attempt to get ueberauth_instagram to be deployable to heroku." 
+* a65d07b john.baylor@gmail.com  Revert "Copied the contents of ueberauth_instagram into our repo so it will (hopefully) work on heroku." 
+* b4d38ec john.baylor@gmail.com  (origin/try_to_get_instagram_deployed_to_heroku, try_to_get_instagram_deployed_to_heroku) Copied the contents of ueberauth_instagram into our repo so it will (hopefully) work on heroku. TODO: figure out a better way of doing it. 
+* 71dd9ae john.baylor@gmail.com  Attempt to get ueberauth_instagram to be deployable to heroku. 
+* f85a7d6 john.baylor@gmail.com  Buildpack: always_rebuild=true (to see if I can deploy to heroku) 
+* 5836ef5 john.baylor@gmail.com  Test heroku deploy with ueberauth_instagram (not used). 
+* cea7ac8 john.baylor@gmail.com  Give verified players a green background. Order player list by nickname. 
+* 7e15bef john.baylor@gmail.com  Clarify who is verified and who is not. 
+* f46c66e john.baylor@gmail.com  Add players.email_verified so we only attempt to send to verified users). NOTE: I need to manually edit each player and set the flag. 
+* 2fc3257 john.baylor@gmail.com  Add all migrations and remove the (idiotic?) .gitignore file. 
+* b7269b4 john.baylor@gmail.com  Hid entire site behind a login! 
+* 38bedbc john.baylor@gmail.com  Fix hostname in email links. Take "DEBUG" off subject line. Clean up warnings (mostly noticed during push-to-heroku). Noted that refreshing the send_results page will resend the email. 
+* 0f977af john.baylor@gmail.com  Take attendance in alphabetical order. 
+* 9278589 john.baylor@gmail.com  Colored the number of chips red if we haven't counted enough. 
+* abe54bc john.baylor@gmail.com  Fix Totals row for emails by pushing methods to Utils. 
+* 48bf29d john.baylor@gmail.com  Add missing email_layout.html.eex file. 
+* 494c764 john.baylor@gmail.com  (origin/attempt_to_reuse_html_for_email, attempt_to_reuse_html_for_email) Add debug for multiple emails; maybe fix it. 
+* 9303336 john.baylor@gmail.com  Finally got an email table to work!!! 
+* c9c3ad3 john.baylor@gmail.com  WIP: try to provide both text and html for email BETTER: move utils methods to virtual columns on game_night 
+* 11213d9 john.baylor@gmail.com  Fix a bug when selecting players; improve send_results TODO: make email pretty (HTML and text, totals, etc.) TODO: remove mailto & other Utils methods TODO: make welcome_text_email useful 
+* 4f7fc3d john.baylor@gmail.com  Clarified that these are debug emails (in case they accidentally go out) TODO: make it pretty (HTML and text, totals, etc.) TODO: remove mailto & other Utils methods TODO: make welcome_text_email useful 
+* 2cbf35e john.baylor@gmail.com  Rudimentary results email TODO: make it pretty (HTML and text, totals, etc.) TODO: remove mailto & other Utils methods TODO: make welcome_text_email useful 
+* f706b0f john.baylor@gmail.com  (origin/johnb_integrate_simple_email_service, johnb_integrate_simple_email_service) Email kinda works! But you must exercise the web app first. (why must we hit the web site? To initialize the mailer???) 
+* 7afe620 john.baylor@gmail.com  Attempted to connect to Amazon Simple Email Service. It is not quite working - it gets a network timeout. 
+* ed280f0 john.baylor@gmail.com  Order email results winnings DESC and then names ASC. Consistently show 2 decimal places for chips and for exact dollar amount. TODO: connect to a mailer so Jay doesn't care. 
+* e9423eb john.baylor@gmail.com  Order email results winnings DESC and then names ASC. TODO: a "totals" row at the bottom, just like on the cashout page. TODO: connect to a mailer so Jay doesn't care. 
+* 6af0a96 john.baylor@gmail.com  Disable editing of historical games. TODO: a "totals" row at the bottom, just like on the cashout page. TODO: order players by winnings and then names. TODO: connect to a mailer so Jay doesn't care. 
+* fb9c70f john.baylor@gmail.com  Move mailto debug text into a textarea, for Jay TODO: a "totals" row at the bottom, just like on the cashout page. TODO: order players by winnings and then names. TODO: connect to a mailer so Jay doesn't care. 
+* aeb55a2 john.baylor@gmail.com  (origin/johnb_move_checkout_to_shared_template, johnb_move_checkout_to_shared_template) Move checkout page to a shared partial so it runs as XHR. TODO: a "totals" row at the bottom, just like on the cashout page. TODO: order players by winnings and then names. 
+* cc1fb0d john.baylor@gmail.com  Improve navigation by having yyyymmdd link to '/'. TODO: a "totals" row at the bottom, just like on the cashout page. TODO: order players by winnings and then names. 
+* de97a93 john.baylor@gmail.com  Maybe added turbolinks? Its hard to tell. TODO: a "totals" row at the bottom, just like on the cashout page. TODO: order players by winnings and then names. 
+* 1351bc6 john.baylor@gmail.com  Fixed links to old games; hid some admin-type controls. TODO: a "totals" row at the bottom, just like on the cashout page. TODO: order players by winnings and then names. 
+* c6c7041 john.baylor@gmail.com  Remove a debug line that made the attendance screen kinda ugly. Improved the placement of the debug mailto link. TODO: a "totals" row at the bottom, just like on the cashout page. TODO: order players by winnings and then names. 
+* a08a5c5 john.baylor@gmail.com  Clarified the rounded-to-a-dollar column in the email. TODO: a "totals" row at the bottom, just like on the cashout page. TODO: order players by winnings and then names. 
+* dea5658 john.baylor@gmail.com  Attempting spaces and br tags to separate lines (:crossed_fingers:). TODO: order players by winnings and then names. 
+* d060821 john.baylor@gmail.com  Implemented mailto link for sending the email. TODO: order players by winnings and then names. 
+* 2e5f243 john.baylor@gmail.com  WIP to add a mailto link. TODO: change param for mailto_link to a game_night so we can get yyyymmdd. TODO: order players by winnings and then names. 
+* d997994 john.baylor@gmail.com  Add Timex to get dates in ~Pacific timezone (-9). 
+* ecdc0e4 john.baylor@gmail.com  Return to game without erasing all the players. 
+* ffa162f john.baylor@gmail.com  Clean up heroku-deploy warnings. Fixed the subtract-too-much less-than-zero bug. 
+* ae7ad51 john.baylor@gmail.com  Jump to selected player. Tighten spacing. 
+* e398248 john.baylor@gmail.com  Re-styled to work on an iPhone (via a table). 
+* 19512e4 john.baylor@gmail.com  Set attendees when first arriving at the cash_out page. 
+* 3d9f375 john.baylor@gmail.com  Sort attendees by name. Fix off-by-last-chip-change error. Remove duplicate code. 
+* 08379fa john.baylor@gmail.com  Delete junk code. 
+* 4badebc john.baylor@gmail.com  Remove cents from the round-to-$1 column. 
+* be4d449 john.baylor@gmail.com  Format improvements: larger monospace font, horizontal rule above totals. 
+* 2020205 john.baylor@gmail.com  (origin/Johnb_incorrect_multi_update_use, Johnb_incorrect_multi_update_use) Solution: just assume the update() works. Fix rounding and div-by-zero errors. 
+* 15e4be2 john.baylor@gmail.com  What it attempts to do: - calculate the real totals and update the AttendeeResults table. 
+* 60f8a2d john.baylor@gmail.com  Displaying the real totals (even though they are not calculated yet). TODO: calculate the real totals. 
+* 83d8f96 john.baylor@gmail.com  Fix assign name: round_1_cents to rounded_1_cents. TODO: calculate the real totals. 
+* a373a9b john.baylor@gmail.com  Display as dollars and cents, via dollars_n_cents() helper. TODO: calculate the real totals. 
+* 3bf63e0 john.baylor@gmail.com  Display FAKE totals TODO: calculate the real totals. 
+* 1dc5087 john.baylor@gmail.com  Implement add/subtract chips functionality. TODO: recalculate the "exact" and "$1" columns. 
+* b7b2c20 john.baylor@gmail.com  Stop duplicating attendees (via delete then add). Minor CSS tweaks. TODO: find a better way to update the attendee list. 
+* db668a5 john.baylor@gmail.com  (johnb_improve_ux_on_plus5_page) This is one of the ugliest UIs I've ever seen. But it minimally gets across who the selected user is and what each of the buttons do. 
+* 6ebeea9 john.baylor@gmail.com  Make player nickname into a button. 
+* 2c35e24 john.baylor@gmail.com  Improve checkout page - can select a player. Refactor one row into a sub-template (aka "partial" in Rails parlance) TODO: style players and delta buttons better. 
+* e7126b1 john.baylor@gmail.com  Bootstrapize'd the tabular data on the cash_out page. 
+* e19e46f john.baylor@gmail.com  Hackily create AttendeeResult records. Find associated attendee_results and players. TODO: update existing players - and only create new ones TODO: bootstrapize cash_out page 
+* 6e3fb60 john.baylor@gmail.com  WIP toward cash_out and send_results pages 
+* 5633224 john.baylor@gmail.com  Make attendance page a real form. Auto-redirect to attendance page. Style the buttons. badly. 
+* 8a08d18 john.baylor@gmail.com  Template missing from the previous commit. 
+* 3a87415 john.baylor@gmail.com  Start current_attendance page, with checkbox buttons. Add route for current_attendance page. 
+* 6e4dae1 john.baylor@gmail.com  Changed take_attendance action to something more like "ensure it exists". TODO: change redirect to:show to a render of :current_attendance.html.eex ?   This will keep us from polluting the raw :show page with attendance. TODO: start the channel with messages marking all players as OUT and then marking the am-attending ones as IN. Just track the IN/OUT in the channel and then persist it when they go to check out. 
+* 09f3c33 john.baylor@gmail.com  missing template file for take_attendance. 
+* 778b36f john.baylor@gmail.com  Got take_attendance action partially working. The find-or-insert portion is fugly. Removed link to github repo. 
+* 2979135 john.baylor@gmail.com  Add missing utils module. 
+* 6c5f0a1 john.baylor@gmail.com  Finish game list on home page. Add placeholder take_attendance link for tonight's game. 
+* c083221 john.baylor@gmail.com  Refactor to PhoenixPoker.Utils.yyyymmdd_now() 
+* 9c7fcba john.baylor@gmail.com  Fetch GameNights instead of tuples. Order game nights by descendind dates. TODO: remove the `where` clause and filter them with elixir (but maybe add a limit) 
+* 303ad47 john.baylor@gmail.com  Connected future games to the home page. TODO: try fetching Players instead of tuples. Experimented with nickname radio buttons. 
+* 8df1506 john.baylor@gmail.com  Clean up use of @players to just show nicknames. 
+* dd6bfef john.baylor@gmail.com  Correctly load and pass @players list - hurrah! Show in both 'new' and 'form' templates - as a reminder to explicitly pass it thru intermediate templates. 
+* 2494c6a john.baylor@gmail.com  Disable dogma, which may have been confusing heroku. 
+* 4fa527c john.baylor@gmail.com  Generate AttendeeResult html Considered a better UI for selecting player, but will leave it for the next commit. 
+* 2ec9646 john.baylor@gmail.com  Ignore /junk dir. Consider "debug_errors" in prod. 
+* a46cb05 john.baylor@gmail.com  Finish replacing euberauth_example with phoenix_poker. 
+* 225c386 john.baylor@gmail.com  Minor change to force a rebuild on heroku. 
+* 7764c79 john.baylor@gmail.com  Revise DB history - add player.email. 
+* e629dad john.baylor@gmail.com  Remove Phoenix logo; move github link. 
+* e02be8f john.baylor@gmail.com  Add heroku support, per http://www.phoenixframework.org/docs/heroku   heroku create --buildpack "https://github.com/HashNuke/heroku-buildpack-elixir.git"   heroku buildpacks:add https://github.com/gjaldon/heroku-buildpack-phoenix-static.git   heroku addons:create heroku-postgresql:hobby-dev   heroku config:set POOL_SIZE=18   heroku config:set SECRET_KEY_BASE="`mix phoenix.gen.secret`" 
+* 3a98899 john.baylor@gmail.com  Add links to homepage: add player, list games. 
+*   e34c471 john.baylor@gmail.com  Merge branch 'add_players_with_nicknames' 
+|\  
+| * f973baa john.baylor@gmail.com  (origin/add_players_with_nicknames, add_players_with_nicknames) Rewrite GameNight migration to make yyyymmdd unique. Need to figure out: html error_tag problem (and other generator issues) 
+| * 1d8d91f john.baylor@gmail.com  Add Players CRUD Commands:   mix phoenix.gen.html GameNight game_nights yyyymmdd:integer buy_in_cents:integer   delete error_tag lines from views   mix ecto.migrate   git add -A 
+| * a023724 john.baylor@gmail.com  Add Players CRUD Commands:   mix phoenix.gen.html Players players nickname:string   s/Ecto.Model/Ecto.Schema/g 
+* | 99fb255 john.baylor@gmail.com  Keep packages up to date with `mix deps.update --all` 
+* | 122f7b4 john.baylor@gmail.com  Update readme: s/euberauth/johnb and DB tables. 
+|/  
+* abd0317 john.baylor@gmail.com  Add support for facebook, google, twitter logins (mainly setting ENV vars). Inspect oauth failure response. Remove slack and user/pswd authentication. 
+* 5ac9c97 john.baylor@gmail.com  Updated packages with "mix deps.update --all" 
+* 9464d5e john.baylor@gmail.com  Fix the browser tab title. 
+* e000afd john.baylor@gmail.com  Start to make it *my* app. 
+* 0c177fd john.baylor@gmail.com  Live reload internationalization files. Remove prod secrets from git. 
+*   37979af john.baylor@gmail.com  Merge branch 'master' of github.com:JohnB/phoenix_poker 
+|\  
+| * 1ef2c80 john.baylor@gmail.com  Rename ueberauth_example to phoenix_poker. 
+* | 50629ed john.baylor@gmail.com  Rename ueberauth_example to phoenix_poker. 
+|/  
+* a6ef453 john.baylor@gmail.com  FIxed startup warning - need an  explicit 'cd' for where to find brunch. 
+* 3620986 john.baylor@gmail.com  Limit Github access to "user". Be sure to set: SECRET_KEY_BASE, GITHUB_CLIENT_SECRET, GITHUB_CLIENT_ID. Add details to package.json. Churn mix.lock for... no obvious reason. 
+* 89555dc john.baylor@gmail.com  First commit; fork of https://github.com/ueberauth/ueberauth_example/commit/7fcdb4bbd799ae28fc142a85b32fbe07f507b028 

@@ -1,0 +1,18 @@
+<h1>Show Game night</h1>
+
+<ul>
+
+  <li>
+    <strong>Yyyymmdd:</strong>
+    <%= @game_night.yyyymmdd %>
+  </li>
+
+  <li>
+    <strong>Buy in cents:</strong>
+    <%= @game_night.buy_in_cents %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: Routes.game_night_path(@conn, :edit, @game_night) %></span>
+<span><%= link "Back", to: Routes.game_night_path(@conn, :index) %></span>
