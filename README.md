@@ -13,8 +13,8 @@ rebuild from the ground up.
 * [x] Replace entire dir with fresh Phoenix app.
 * [ ] Rebuild previous migrations to get the exact same data model.
   * [x] Rebuild GameNights
-  * [X] Rebuild Players
-  * [ ] Rebuild AttemdeeResults
+  * [x] Rebuild Players
+  * [x] Rebuild AttemdeeResults
 * [ ] Re-add EuberAuth (google, twitter, github).
   * [ ] Consider limiting to existing users.
 * [ ] Restore non-CRUD UI.

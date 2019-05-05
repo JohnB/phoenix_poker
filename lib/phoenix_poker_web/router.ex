@@ -18,6 +18,8 @@ defmodule PhoenixPokerWeb.Router do
 
     resources "/game_nights", GameNightController
     resources "/players", PlayerController
+    resources "/attendee_results", AttendeeResultController
+    
     get "/", PageController, :index
   end
 

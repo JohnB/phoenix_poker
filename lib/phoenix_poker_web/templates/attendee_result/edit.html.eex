@@ -1,0 +1,5 @@
+<h1>Edit Attendee result</h1>
+
+<%= render "form.html", Map.put(assigns, :action, Routes.attendee_result_path(@conn, :update, @attendee_result)) %>
+
+<span><%= link "Back", to: Routes.attendee_result_path(@conn, :index) %></span>

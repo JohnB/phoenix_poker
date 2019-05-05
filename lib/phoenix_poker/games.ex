@@ -197,4 +197,100 @@ defmodule PhoenixPoker.Games do
   def change_player(%Player{} = player) do
     Player.changeset(player, %{})
   end
+
+  alias PhoenixPoker.Games.AttendeeResult
+
+  @doc """
+  Returns the list of attendee_results.
+
+  ## Examples
+
+      iex> list_attendee_results()
+      [%AttendeeResult{}, ...]
+
+  """
+  def list_attendee_results do
+    Repo.all(AttendeeResult)
+  end
+
+  @doc """
+  Gets a single attendee_result.
+
+  Raises `Ecto.NoResultsError` if the Attendee result does not exist.
+
+  ## Examples
+
+      iex> get_attendee_result!(123)
+      %AttendeeResult{}
+
+      iex> get_attendee_result!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_attendee_result!(id), do: Repo.get!(AttendeeResult, id)
+
+  @doc """
+  Creates a attendee_result.
+
+  ## Examples
+
+      iex> create_attendee_result(%{field: value})
+      {:ok, %AttendeeResult{}}
+
+      iex> create_attendee_result(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_attendee_result(attrs \\ %{}) do
+    %AttendeeResult{}
+    |> AttendeeResult.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a attendee_result.
+
+  ## Examples
+
+      iex> update_attendee_result(attendee_result, %{field: new_value})
+      {:ok, %AttendeeResult{}}
+
+      iex> update_attendee_result(attendee_result, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_attendee_result(%AttendeeResult{} = attendee_result, attrs) do
+    attendee_result
+    |> AttendeeResult.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a AttendeeResult.
+
+  ## Examples
+
+      iex> delete_attendee_result(attendee_result)
+      {:ok, %AttendeeResult{}}
+
+      iex> delete_attendee_result(attendee_result)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_attendee_result(%AttendeeResult{} = attendee_result) do
+    Repo.delete(attendee_result)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking attendee_result changes.
+
+  ## Examples
+
+      iex> change_attendee_result(attendee_result)
+      %Ecto.Changeset{source: %AttendeeResult{}}
+
+  """
+  def change_attendee_result(%AttendeeResult{} = attendee_result) do
+    AttendeeResult.changeset(attendee_result, %{})
+  end
 end
