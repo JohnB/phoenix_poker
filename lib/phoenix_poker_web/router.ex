@@ -13,6 +13,16 @@ defmodule PhoenixPokerWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/auth", PhoenixPokerWeb do
+    pipe_through :browser
+
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+    post "/:provider/callback", AuthController, :callback
+    get "/logout", AuthController, :delete
+    delete "/logout", AuthController, :delete
+  end
+
   scope "/", PhoenixPokerWeb do
     pipe_through :browser
 

@@ -11,11 +11,11 @@ rebuild from the ground up.
 
 * [x] Start a branch so we don't make anything worse.
 * [x] Replace entire dir with fresh Phoenix app.
-* [ ] Rebuild previous migrations to get the exact same data model.
+* [x] Rebuild previous migrations to get the exact same data model.
   * [x] Rebuild GameNights
   * [x] Rebuild Players
   * [x] Rebuild AttemdeeResults
-* [ ] Re-add EuberAuth (google, twitter, github).
+* [ ] Re-add UeberAuth (google, twitter, github).
   * [ ] Consider limiting to existing users.
 * [ ] Restore non-CRUD UI.
   * [ ] /game_nights should highlight probable test games
