@@ -3,9 +3,15 @@ defmodule PhoenixPokerWeb.GameNightController do
 
   alias PhoenixPoker.Games
   alias PhoenixPoker.Games.GameNight
+  alias PhoenixPoker.Games.AttendeeResult
+  import PhoenixPoker.Utils
+  alias PhoenixPoker.Utils
+  import Ecto.Schema
+  import Ecto.Query, only: [from: 2]
 
   def index(conn, _params) do
-    game_nights = Games.list_game_nights()
+    query = from(g in GameNight, order_by: [desc: g.yyyymmdd])
+    game_nights = Repo.all(query)
     render(conn, "index.html", game_nights: game_nights)
   end
 
@@ -30,6 +36,127 @@ defmodule PhoenixPokerWeb.GameNightController do
     game_night = Games.get_game_night!(id)
     render(conn, "show.html", game_night: game_night)
   end
+  
+  def take_attendance(conn, %{"yyyymmdd" => yyyymmdd}) do
+    current_user = get_session(conn, :current_user)
+
+    # Attempt at find-or-create
+    query = from g in GameNight, where: g.yyyymmdd == ^yyyymmdd
+    game_night = Repo.one(query)
+    if !game_night do
+      changeset = GameNight.changeset(%GameNight{}, %{buy_in_cents: 2500, yyyymmdd: yyyymmdd})
+  
+      case Repo.insert(changeset) do
+        {:ok, struct} ->
+          conn
+          |> redirect(to: Routes.game_night_path(conn, :current_attendance, struct))
+        {:error, changeset} ->
+          conn
+          |> put_flash(:info, "Failed to insert the #{yyyymmdd} game: #{inspect(changeset)}.")
+          |> render("take_attendance.html", game_night: changeset, current_user: current_user)
+      end
+    else
+      conn
+      |> redirect(to: Routes.game_night_path(conn, :current_attendance, game_night))
+    end
+  end
+  
+  def current_attendance(conn, %{"id" => id}) do
+    game_night = GameNight
+                 |> Repo.get!(id)
+                 |> Repo.preload([:attendee_results, attendee_results: :player])
+    num_attendees = Enum.count(game_night.attendee_results)
+
+    if num_attendees > 0 do
+      cash_out_player(conn, %{"id" => id, "player_id" => -1})
+    end
+    
+    players = Repo.all(from p in Player, order_by: p.nickname)
+    render(conn, "current_attendance.html", game_night: game_night, players: players)
+  end
+  
+  def cash_out(conn, %{"id" => id, "cash_out" => player_ids}) do
+    # TODO: ensure this never gets called twice, so we do not
+    # erase a game's result by accident.
+    
+    # Expect input like this:
+    #   "cash_out" => %{"1" => "false", "2" => "true"}
+    {gn_id, _} = Integer.parse(id)
+    query = from ar in AttendeeResult,
+      where: ar.game_night_id == ^gn_id
+    Repo.delete_all(query)
+    
+    Enum.filter(player_ids, fn {_k, v} -> v == "true" end)
+    |> Enum.map(fn {k, _v} ->
+      AttendeeResult.changeset(%AttendeeResult{}, %{
+          game_night_id: id,
+          player_id: k,
+          chips: 0,
+          exact_cents: 0,
+          rounded_cents: 0,
+          rounding_style: "quarter"
+        })
+      |> PhoenixPoker.Repo.insert!
+    end)
+    
+    game_night = GameNight
+                 |> Repo.get!(id)
+                 |> Repo.preload([:attendee_results, attendee_results: :player])
+    historical_game = GameNight.in_the_past(game_night)
+    attendees = if historical_game,
+      do:   GameNight.sorted_attendees(game_night, :chips),
+      else: GameNight.sorted_attendees(game_night)
+       
+    render(conn, PhoenixPoker.SharedView, "cash_out.html",
+      game_night: game_night,
+      hostname: '',
+      attendees: attendees,
+      historical_game: historical_game,
+      selected_player_id: -1,
+      total_chips: 0.0,
+      exact_cents: 0,
+      rounded_1_cents: 0,
+      chips_color: ""
+    )
+  end
+  
+  def cash_out_player(conn, %{"id" => id, "player_id" => player_id}) do
+    
+    game_night = GameNight
+                 |> Repo.get!(id)
+                 |> Repo.preload([:attendee_results, attendee_results: :player])
+    historical_game = GameNight.in_the_past(game_night)
+    attendees = if historical_game,
+      do:   GameNight.sorted_attendees(game_night, :chips),
+      else: GameNight.sorted_attendees(game_night)
+
+    render_data = %{
+      game_night: game_night,
+      hostname: '',
+      attendees: attendees,
+      historical_game: historical_game,
+      selected_player_id: player_id,
+      total_chips: Utils.total_chips(game_night) / 100,
+      exact_cents: Utils.exact_cents(game_night),
+      rounded_1_cents: Utils.rounded_1_cents(game_night),
+      chips_color: Utils.chips_color(game_night)
+    }
+    render(conn, PhoenixPoker.SharedView, "cash_out.html", render_data)
+  end
+
+  def send_results(conn, %{"id" => id}) do
+    game_night = GameNight
+                 |> Repo.get!(id)
+                 |> Repo.preload([:attendee_results, attendee_results: :player])
+    
+    hostname = PhoenixPoker.Router.Helpers.url(conn)
+    PhoenixPoker.Email.poker_results_email(game_night, hostname)
+    |> Mailer.deliver_now
+
+    players = Repo.all(Player)
+    render(conn, "send_results.html", game_night: game_night, players: players)
+  end
+
 
   def edit(conn, %{"id" => id}) do
     game_night = Games.get_game_night!(id)

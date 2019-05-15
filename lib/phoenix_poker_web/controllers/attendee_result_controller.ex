@@ -59,4 +59,48 @@ defmodule PhoenixPokerWeb.AttendeeResultController do
     |> put_flash(:info, "Attendee result deleted successfully.")
     |> redirect(to: Routes.attendee_result_path(conn, :index))
   end
+  
+
+  def set_chipcount(conn, %{"id" => id, "chipcount" => chipcount}) do
+    {chipcount_i, _} = Integer.parse(chipcount)
+    attendee_result = Repo.get!(AttendeeResult, id)
+    updated_chips = chipcount_i
+    changeset = AttendeeResult.changeset(attendee_result, %{chips: updated_chips})
+
+    case Repo.update(changeset) do
+      {:ok, _} ->
+        game_night = GameNight
+                     |> Repo.get!(attendee_result.game_night_id)
+                     |> Repo.preload([:attendee_results, attendee_results: :player])
+    
+        attendee_results = game_night.attendee_results
+        attendee_results_changeset = AttendeeResult.results_changeset(attendee_results)
+    
+        Enum.each(attendee_results_changeset, fn(a_r) ->
+          {:ok, _} = Repo.update(a_r)
+        end )
+
+        total_chips = max(1, Enum.map(attendee_results, fn(a_r) -> a_r.chips end) |> Enum.sum)
+        rounded_1_cents = Enum.map(attendee_results, fn(a_r) -> a_r.rounded_cents end) |> Enum.sum
+        selected_player_id_string = Integer.to_string(attendee_result.player_id)
+
+        render_data = %{
+          game_night: game_night,
+          hostname: '',
+          attendees: GameNight.sorted_attendees(game_night),
+          historical_game: false,
+          selected_player_id: -1,
+          total_chips: total_chips / 100,
+          exact_cents: attendee_result.exact_cents,
+          rounded_1_cents: rounded_1_cents,
+          chips_color: Utils.chips_color(game_night)
+        }
+        render(conn, PhoenixPoker.SharedView, "cash_out.html", render_data)
+      {:error, _} ->
+        next_page = Routes.game_night_path(conn, :cash_out_player, attendee_result.game_night_id, attendee_result.player_id)
+        conn
+        |> put_flash(:info, "error adding chips.")
+        |> redirect(to: next_page)
+    end
+  end
 end

@@ -25,12 +25,11 @@ defmodule PhoenixPokerWeb.Router do
 
   scope "/", PhoenixPokerWeb do
     pipe_through :browser
+    get "/", PageController, :index
 
     resources "/game_nights", GameNightController
     resources "/players", PlayerController
     resources "/attendee_results", AttendeeResultController
-    
-    get "/", PageController, :index
   end
 
   # Other scopes may use custom stacks.
