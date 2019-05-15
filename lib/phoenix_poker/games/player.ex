@@ -6,6 +6,8 @@ defmodule PhoenixPoker.Games.Player do
     field :email, :string
     field :email_verified, :boolean, default: false
     field :nickname, :string
+    
+    has_many :attendee_results, PhoenixPoker.Games.AttendeeResult
 
     timestamps()
   end
